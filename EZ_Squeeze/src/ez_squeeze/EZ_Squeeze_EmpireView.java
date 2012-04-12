@@ -1,6 +1,6 @@
 /*
- * EZ_Squeeze_EmpireView.java
- * Copyright 2011 Nick Stanish, Jeff Gough
+ * GNU GPL v3
+ * Copyright 2011-2012 Nick Stanish
  */
 
 package ez_squeeze;
@@ -32,9 +32,7 @@ public class EZ_Squeeze_EmpireView extends FrameView implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -6432186054637421827L;
-
 	private static double version = 2.0; 
-    
     private Pitcher pitcher = new Pitcher();
     private Day date = new Day();
     private int day = date.getNumberDay();
@@ -142,47 +140,6 @@ public class EZ_Squeeze_EmpireView extends FrameView implements Serializable {
             JFrame frame = new JFrame();
         JOptionPane.showMessageDialog(frame, "Save Cancelled \n");
         }
-    }
-    private void saveGame(){
-       /* new File("saves").mkdir();
-        FileSystemView fsv = new RestrictedFileChooser(new File("saves\\"));
-        JFileChooser fc = new JFileChooser(fsv.getHomeDirectory(),fsv);
-        int returnVal = fc.showSaveDialog(null);
-        if(returnVal == JFileChooser.APPROVE_OPTION){
-            File file = fc.getSelectedFile();
-            if (file.getName().indexOf(".")==-1){
-                file = new File(file.getAbsolutePath() + ".sav"); //add extension if necessary
-            }
-
-                try{
-        BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-        bw.write("#EZ tag");
-        bw.newLine();
-        bw.write("" + lemons + "," + ice + "," + cups + "," + sugar + "," + recipeIce + "," + recipeLemons + "," + recipeSugar +  "," + money + "," + price + "," + waitTime + "," + totalDays + "," + salesToday + "," + salesTotal);
-        bw.newLine();
-        JFrame frame = new JFrame();
-        JOptionPane.showMessageDialog(frame, "Saved! \n");
-            try{
-                if(bw != null){
-                bw.flush();
-                bw.close();
-            }
-            }
-            catch(IOException ioe){
-                JOptionPane.showMessageDialog(frame, "An unexpected error occurred: \n" + ioe);
-            }
-            }
-        catch (IOException ioe){
-            JFrame frame = new JFrame();
-            JOptionPane.showMessageDialog(frame, "An unexpected error occurred: \n" + ioe);
-        }}
-
-        else{
-            JFrame frame = new JFrame();
-        JOptionPane.showMessageDialog(frame, "Save Cancelled \n");
-        }
-        */
-    	save();
     }
     private void load(){
     	new File("saves").mkdir();
@@ -320,72 +277,6 @@ public class EZ_Squeeze_EmpireView extends FrameView implements Serializable {
     	lemonsRecipeBox.setText(recipeLemons + "");
     	sugarRecipeBox.setText(recipeSugar + "");
     	updateBoxes();
-    }
-    private void loadGame(){
-        /*new File("saves").mkdir();
-        FileSystemView fsv = new RestrictedFileChooser(new File("saves\\"));
-        JFileChooser fc = new JFileChooser(fsv.getHomeDirectory(),fsv);
-        int returnVal = fc.showOpenDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-
-
-        try{
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String line = br.readLine();
-        if (line.equals("#EZ tag")){ //makes sure that file is intended for EZ Squeeze
-            line = br.readLine();
-            String[] l = new String[14];
-            l = line.split(",");
-            lemons = Integer.parseInt(l[0]);
-            lemonsBox.setText("" + lemons);
-            ice = Integer.parseInt(l[1]);
-            iceBox.setText("" + ice);
-            cups = Integer.parseInt(l[2]);
-            cupsBox.setText("" + cups);
-            sugar = Integer.parseInt(l[3]);
-            sugarBox.setText("" + sugar);
-            recipeIce = Integer.parseInt(l[4]);
-            iceRecipeBox.setText("" + recipeIce);
-            recipeLemons = Integer.parseInt(l[5]);
-            lemonsRecipeBox.setText("" + recipeLemons);
-            recipeSugar = Integer.parseInt(l[6]);
-            sugarRecipeBox.setText("" + recipeSugar);
-            money = formatDecimal(Double.parseDouble(l[7]),2);
-            moneyBox.setText("" + money);
-            price = formatDecimal(Double.parseDouble(l[8]), 2);
-            priceBox.setText("" + price);
-            waitTime = Double.parseDouble(l[9]);
-            totalDays = Integer.parseInt(l[10]);
-            dayBox.setText("" + totalDays);
-            salesToday  = Integer.parseInt(l[11]);
-            salesTodayBox.setText("" + salesToday);
-            salesTotal  = Integer.parseInt(l[12]);
-            salesTotalBox.setText("" + salesTotal);
-            customerSalesTextArea.setText("");
-            JFrame frame = new JFrame();
-            JOptionPane.showMessageDialog(frame, "Loaded! \n");
-        }
-        else{
-            JFrame frame = new JFrame();
-        JOptionPane.showMessageDialog(frame, "Unable to Load \nFile not supported");
-        }
-        try{
-                if(br != null){
-                br.close();
-            }
-            }
-            catch(IOException ioe){
-                JFrame frame = new JFrame();
-                JOptionPane.showMessageDialog(frame, "An unexpected error occurred: \n" + ioe);
-            }
-        }
-        catch (IOException ioe){
-            JFrame frame = new JFrame();
-            JOptionPane.showMessageDialog(frame, "An unexpected error occurred: \n" + ioe);
-        }
-    } */
-    	load();
     }
     @SuppressWarnings("unused")
     private double weatherProb(){ //very basic form
@@ -579,8 +470,7 @@ public class EZ_Squeeze_EmpireView extends FrameView implements Serializable {
     }
     private void purchaseItemChoice(){
         //purchase area
-        //fun stuff
-        if (getPurchaseItemChoice().getSelectedItem().equals("Lemons")) {
+    	if (getPurchaseItemChoice().getSelectedItem().equals("Lemons")) {
 			//allow purchase
 			item = "Lemons";
 			itemId = 0;
@@ -593,63 +483,61 @@ public class EZ_Squeeze_EmpireView extends FrameView implements Serializable {
 			mediumItemPriceBox.setText("" + lemonsMdCost);
 			smallAmountBox.setText("" + smAmountLemons);
 			smallItemPriceBox.setText("" + lemonsSmCost);
-			}
-			if (getPurchaseItemChoice().getSelectedItem().equals("Ice")) {
-				//allow purchase
-				item = "Ice";
-				itemId = 1;
-				purchaseButton.setEnabled(true);
-				//set the amounts/prices
-				largeAmountBox.setText("" + lgAmountIce);
-				largeItemPriceBox.setText("" + iceLgCost);
-				mediumAmountBox.setText("" + mdAmountIce);
-				mediumItemPriceBox.setText("" + iceMdCost);
-				smallAmountBox.setText("" + smAmountIce);
-				smallItemPriceBox.setText("" + iceSmCost);
-				}
-				if (getPurchaseItemChoice().getSelectedItem().equals("Sugar")) {
-					//allow purchase
-					purchaseButton.setEnabled(true);
-					itemId = 2; //for use with purchasiong
-					item = "Sugar";
-					//set the amounts/prices
-					largeAmountBox.setText("" + lgAmountSugar);
-					largeItemPriceBox.setText("" + sugarLgCost);
-					mediumAmountBox.setText("" + mdAmountSugar);
-					mediumItemPriceBox.setText("" + sugarMdCost);
-					smallAmountBox.setText("" + smAmountSugar);
-					smallItemPriceBox.setText("" + sugarSmCost);
-					}
-					if (getPurchaseItemChoice().getSelectedItem().equals("Cups")) {
-						//allow purchase
-						purchaseButton.setEnabled(true);
-						itemId = 3;
-						//set the amounts/prices
-						item = "Cups";
-						largeAmountBox.setText("" + lgAmountCups);
-						largeItemPriceBox.setText("" + cupsLgCost);
-						mediumAmountBox.setText("" + mdAmountCups);
-						mediumItemPriceBox.setText("" + cupsMdCost);
-						smallAmountBox.setText("" + smAmountCups);
-						smallItemPriceBox.setText("" + cupsSmCost);
-						}
-						if (getPurchaseItemChoice().getSelectedItem().equals("---")) {
-							//disable purchse button when no choice is selected
-							purchaseButton.setEnabled(false);
-							//set the amounts/prices
-							largeAmountBox.setText("");
-							largeItemPriceBox.setText("");
-							mediumAmountBox.setText("");
-							mediumItemPriceBox.setText("");
-							smallAmountBox.setText("");
-							smallItemPriceBox.setText("");
-							}
+		}
+		if (getPurchaseItemChoice().getSelectedItem().equals("Ice")) {
+			//allow purchase
+			item = "Ice";
+			itemId = 1;
+			purchaseButton.setEnabled(true);
+			//set the amounts/prices
+			largeAmountBox.setText("" + lgAmountIce);
+			largeItemPriceBox.setText("" + iceLgCost);
+			mediumAmountBox.setText("" + mdAmountIce);
+			mediumItemPriceBox.setText("" + iceMdCost);
+			smallAmountBox.setText("" + smAmountIce);
+			smallItemPriceBox.setText("" + iceSmCost);
+		}
+		if (getPurchaseItemChoice().getSelectedItem().equals("Sugar")) {
+			//allow purchase
+			purchaseButton.setEnabled(true);
+			itemId = 2; //for use with purchasiong
+			item = "Sugar";
+			//set the amounts/prices
+			largeAmountBox.setText("" + lgAmountSugar);
+			largeItemPriceBox.setText("" + sugarLgCost);
+			mediumAmountBox.setText("" + mdAmountSugar);
+			mediumItemPriceBox.setText("" + sugarMdCost);
+			smallAmountBox.setText("" + smAmountSugar);
+			smallItemPriceBox.setText("" + sugarSmCost);
+		}
+		if (getPurchaseItemChoice().getSelectedItem().equals("Cups")) {
+			//allow purchase
+			purchaseButton.setEnabled(true);
+			itemId = 3;
+			//set the amounts/prices
+			item = "Cups";
+			largeAmountBox.setText("" + lgAmountCups);
+			largeItemPriceBox.setText("" + cupsLgCost);
+			mediumAmountBox.setText("" + mdAmountCups);
+			mediumItemPriceBox.setText("" + cupsMdCost);
+			smallAmountBox.setText("" + smAmountCups);
+			smallItemPriceBox.setText("" + cupsSmCost);
+		}
+		if (getPurchaseItemChoice().getSelectedItem().equals("---")) {
+			//disable purchse button when no choice is selected
+			purchaseButton.setEnabled(false);
+			//set the amounts/prices
+			largeAmountBox.setText("");
+			largeItemPriceBox.setText("");
+			mediumAmountBox.setText("");
+			mediumItemPriceBox.setText("");
+			smallAmountBox.setText("");
+			smallItemPriceBox.setText("");
+		}
     }
     public EZ_Squeeze_EmpireView(SingleFrameApplication app) {
         super(app);
-
         initComponents();
-
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
         int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
@@ -724,7 +612,6 @@ public class EZ_Squeeze_EmpireView extends FrameView implements Serializable {
      * WARNING: Do NOT modify this code. The content of this method is
      * always regenerated by the Form Editor.
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -1180,12 +1067,12 @@ public class EZ_Squeeze_EmpireView extends FrameView implements Serializable {
 
     private void menuSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSaveActionPerformed
         // TODO add your handling code here:
-        saveGame();
+        save();
     }//GEN-LAST:event_menuSaveActionPerformed
 
     private void menuLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLoadActionPerformed
         // TODO add your handling code here:
-        loadGame();
+        load();
     }//GEN-LAST:event_menuLoadActionPerformed
 
     
@@ -1202,7 +1089,6 @@ public class EZ_Squeeze_EmpireView extends FrameView implements Serializable {
         // TODO add your handling code here:
         purchaseItemChoice();
     }//GEN-LAST:event_purchaseItemChoiceActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cupsBox;
     private javax.swing.JTextArea customerSalesTextArea;
@@ -1253,7 +1139,6 @@ public class EZ_Squeeze_EmpireView extends FrameView implements Serializable {
     private javax.swing.JTextField priceBox;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton purchaseButton;
-    @SuppressWarnings("rawtypes")
 	private javax.swing.JComboBox purchaseItemChoice;
     private javax.swing.JTextField salesTodayBox;
     private javax.swing.JTextField salesTotalBox;
@@ -2277,7 +2162,6 @@ public class EZ_Squeeze_EmpireView extends FrameView implements Serializable {
     /**
      * @return the purchaseItemChoice
      */
-    @SuppressWarnings("rawtypes")
 	public javax.swing.JComboBox getPurchaseItemChoice() {
         return purchaseItemChoice;
     }
@@ -2285,7 +2169,7 @@ public class EZ_Squeeze_EmpireView extends FrameView implements Serializable {
     /**
      * @param purchaseItemChoice the purchaseItemChoice to set
      */
-    public void setPurchaseItemChoice(@SuppressWarnings("rawtypes") javax.swing.JComboBox purchaseItemChoice) {
+    public void setPurchaseItemChoice(javax.swing.JComboBox purchaseItemChoice) {
         this.purchaseItemChoice = purchaseItemChoice;
     }
 

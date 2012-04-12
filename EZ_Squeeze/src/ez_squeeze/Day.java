@@ -1,6 +1,11 @@
 package ez_squeeze;
 import java.io.Serializable;
 import java.util.*;
+/*
+ * GNU GPL v3
+ * Copyright 2011-2012 Nick Stanish
+ */
+
 public class Day implements Serializable{
 	/**
 	 * 

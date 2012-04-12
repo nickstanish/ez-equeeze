@@ -3,9 +3,11 @@ import java.text.DecimalFormat;
 import java.util.*;
 import java.io.*;
 public class Person implements Serializable{
-	/**
-	 * 
+	/*
+	 * GNU GPL v3
+	 * Copyright 2011-2012 Nick Stanish
 	 */
+
 	private static final long serialVersionUID = -8607643105145232932L;
 	private final double perfect_recipe = 0.4;
 	private final double good_recipe = 0.25;

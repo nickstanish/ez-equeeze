@@ -3,6 +3,10 @@
  * and open the template in the editor.
  */
 package ez_squeeze;
+/*
+ * GNU GPL v3
+ * Copyright 2011-2012 Nick Stanish
+ */
 
 import java.io.File;
 import java.io.IOException;

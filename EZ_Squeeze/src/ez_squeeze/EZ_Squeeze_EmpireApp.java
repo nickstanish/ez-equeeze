@@ -1,6 +1,6 @@
 /*
- * EZ_Squeeze_EmpireApp.java
- * Copyright 2011 Nick Stanish, Jeff Gough
+ * GNU GPL v3
+ * Copyright 2011-2012 Nick Stanish
  */
 
 package ez_squeeze;

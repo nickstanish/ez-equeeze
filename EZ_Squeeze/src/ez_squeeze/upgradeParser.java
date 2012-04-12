@@ -3,6 +3,10 @@
  * and open the template in the editor.
  */
 package ez_squeeze;
+/*
+ * GNU GPL v3
+ * Copyright 2011-2012 Nick Stanish
+ */
 
 import java.io.File;
 import java.io.IOException;
@@ -16,11 +20,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-/*
- * changelog:
- * added methods to return the name, description and mod
- * added method to perform the mod on given ids
- */
 
 /**
  *
