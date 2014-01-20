@@ -1,9 +1,10 @@
 package ez_squeeze;
 
 import java.io.Serializable;
-/*
+/**
  * GNU GPL v3
  * Copyright 2011-2012 Nick Stanish
+ * @author Nick Stanish
  */
 
 
@@ -23,7 +24,12 @@ public class Recipe implements Serializable {
 	 * +/- 1, okay
 	 * 0, bad
 	 */
-	Recipe(int lemons, int sugar){
+	/**
+	 * Create a Recipe and grade/criticise it. The code is purposely intended to difficult to understand :)
+	 * @param lemons
+	 * @param sugar
+	 */
+	public Recipe(int lemons, int sugar){
 		//put recipe into linear system that determines how sweet or sour a recipe is, and then 
 		//put the number into a bigger formula that determines how successful the recipe is
 		double a = -.429;

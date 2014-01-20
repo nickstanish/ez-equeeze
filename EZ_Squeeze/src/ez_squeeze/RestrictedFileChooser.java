@@ -14,7 +14,7 @@ import javax.swing.filechooser.FileSystemView;
 
 /**
  *
- * @author Stanish Family
+ * @author nickstanish
  */
 
   public class RestrictedFileChooser extends FileSystemView

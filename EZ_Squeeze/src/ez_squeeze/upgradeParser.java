@@ -201,18 +201,18 @@ public class upgradeParser{
            * that id corresponds with a case id:
            * use a get method then add the return from that to the mod y, then set the
            * variable, may have to change variables and getter/setter to static in
-           * EZ_Squeeze_EmpireView, make sure the value is the correct format: i.e. int or double
+           * EzSqueeze, make sure the value is the correct format: i.e. int or double
            */
     	  /*
           switch(x){
               case 0:
-                  int a0 = EZ_Squeeze_EmpireView.getIceStart();
-                  EZ_Squeeze_EmpireView.setIceStart(EZ_Squeeze_EmpireView.formatInt(a0 + y));
-                  EZ_Squeeze_EmpireView.setIce(EZ_Squeeze_EmpireView.formatInt(y));
+                  int a0 = EzSqueeze.getIceStart();
+                  EzSqueeze.setIceStart(EzSqueeze.formatInt(a0 + y));
+                  EzSqueeze.setIce(EzSqueeze.formatInt(y));
                   break;
               case 1:
-                  double a1 = EZ_Squeeze_EmpireView.getWaitTime();
-                  EZ_Squeeze_EmpireView.setWaitTime(a1 + y);
+                  double a1 = EzSqueeze.getWaitTime();
+                  EzSqueeze.setWaitTime(a1 + y);
                   break;
               case 2:
             	  
@@ -228,7 +228,7 @@ public class upgradeParser{
             	  //minRecipe
             	  break;
               case 6:
-            	  EZ_Squeeze_EmpireView.setCupsPerPitcher(EZ_Squeeze_EmpireView.formatInt(y));
+            	  EzSqueeze.setCupsPerPitcher(EzSqueeze.formatInt(y));
             	  break;
               default:
                   System.out.println("id points to no variable");

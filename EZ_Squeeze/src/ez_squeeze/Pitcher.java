@@ -56,21 +56,21 @@ public class Pitcher implements Serializable{
 		cupsLeft = 0;
 	}
 	public void check(){
-		rLemons = EZ_Squeeze_EmpireView.getRecipeLemons();
-		rIce = EZ_Squeeze_EmpireView.getRecipeIce();
-		rSugar = EZ_Squeeze_EmpireView.getRecipeSugar();
-		cups = EZ_Squeeze_EmpireView.getCups();
-		lemons = EZ_Squeeze_EmpireView.getLemons();
-		ice = EZ_Squeeze_EmpireView.getIce();
-		sugar = EZ_Squeeze_EmpireView.getSugar();
+		/*rLemons = EzSqueeze.getRecipeLemons();
+		rIce = EzSqueeze.getRecipeIce();
+		rSugar = EzSqueeze.getRecipeSugar();
+		cups = EzSqueeze.getCups();
+		lemons = EzSqueeze.getLemons();
+		ice = EzSqueeze.getIce();
+		sugar = EzSqueeze.getSugar();*/
 	}
 	public void reset(){
-		EZ_Squeeze_EmpireView.setRecipeLemons(rLemons);
-		EZ_Squeeze_EmpireView.setRecipeIce(rIce);
-		EZ_Squeeze_EmpireView.setRecipeSugar(rSugar);
-		EZ_Squeeze_EmpireView.setCups(cups);
-		EZ_Squeeze_EmpireView.setLemons(lemons);
-		EZ_Squeeze_EmpireView.setIce(ice);
-		EZ_Squeeze_EmpireView.setSugar(sugar);
+		/*EzSqueeze.setRecipeLemons(rLemons);
+		EzSqueeze.setRecipeIce(rIce);
+		EzSqueeze.setRecipeSugar(rSugar);
+		EzSqueeze.setCups(cups);
+		EzSqueeze.setLemons(lemons);
+		EzSqueeze.setIce(ice);
+		EzSqueeze.setSugar(sugar);*/
 	}
 }
