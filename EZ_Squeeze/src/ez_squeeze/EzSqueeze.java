@@ -87,9 +87,13 @@ public class EzSqueeze extends JFrame{
             
         }
         catch(IOException ie){
-        	JOptionPane.showMessageDialog(new JFrame(),
-        		    "Media not found\n" + ie);
-        	//System.exit(0);
+        	if(Constants.debugging){
+        		System.err.println("Media not found\n" + ie);
+        	}
+        	else{
+        		JOptionPane.showMessageDialog(new JFrame(), "Media not found\n" + ie);
+        		System.exit(0);
+        	}
         	sugarLabel = new JLabel("Sugar: ");
             walletLabel = new JLabel("Money: ");
             lemonLabel = new JLabel("Lemons: ");
