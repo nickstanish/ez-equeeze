@@ -13,13 +13,7 @@ public class Main {
 		try {
 			//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-		} catch (UnsupportedLookAndFeelException ex) {
-			ex.printStackTrace();
-		} catch (IllegalAccessException ex) {
-			ex.printStackTrace();
-		} catch (InstantiationException ex) {
-			ex.printStackTrace();
-		} catch (ClassNotFoundException ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -29,3 +23,12 @@ public class Main {
 		});
 	}
 }
+/*
+for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+	if ("Nimbus".equals(info.getName())) {
+		UIManager.setLookAndFeel(info.getClassName());
+		 break;
+	 }
+ }
+ * 
+ */

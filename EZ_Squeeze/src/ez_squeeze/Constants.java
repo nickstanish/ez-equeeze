@@ -1,5 +1,7 @@
 package ez_squeeze;
 
+import java.awt.Font;
+
 public class Constants {
 	public static final boolean debugging = true; // enable to print to console
     public static final double startingMoney = 25.00; //starting money

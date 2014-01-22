@@ -2,7 +2,6 @@ package ez_squeeze.topmenu;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -18,6 +17,9 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import ez_squeeze.Constants;
+import ez_squeeze.EzSqueeze;
 /**
  * This class encapsulates the top menu screen. It is drawn graphically
  * and gives opens for a new game, loading a saved game, instructions, 
@@ -27,21 +29,27 @@ import javax.swing.Timer;
  *
  */
 public class TopMenuScreen extends JPanel implements MouseListener, MouseMotionListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 48361668177934853L;
 	public Color background = new Color(255, 255, 153);
 	public Point base = new Point(50,50);
 	public int fontSize = 36;
 	public Font font = new Font(Font.SERIF, Font.BOLD, fontSize);
+	EzSqueeze game;
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Top Menu Screen");
-		frame.getContentPane().add(new TopMenuScreen());
+		frame.getContentPane().add(new TopMenuScreen(null));
 		frame.pack();
 		frame.setVisible(true);
 		frame.setSize(400,600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	public TopMenuScreen(){
+	public TopMenuScreen(EzSqueeze game){
 		super();
+		this.game = game;
 		for(TopMenuItem.Item item : TopMenuItem.Item.values()){
 			TopMenuItem menuItem = new TopMenuItem( item, menuItems.size(), base);
 			menuItems.add(menuItem);
@@ -86,7 +94,29 @@ public class TopMenuScreen extends JPanel implements MouseListener, MouseMotionL
 	public void mousePressed(MouseEvent e) {
 		for(TopMenuItem item: menuItems){
 			if(mouseLocation != null && item.hovered(mouseLocation)){
-				System.out.println(item.item.name() + " clicked");
+				if(Constants.debugging) System.out.println(item.item.name() + " clicked");
+				if(game != null){
+					switch(item.item){
+					case ABOUT:
+						game.displayAbout();
+						break;
+					case EXIT:
+						game.displayExit();
+						break;
+					case HELP:
+						game.displayHelp();
+						break;
+					case LOAD:
+						game.displayLoad();
+						break;
+					case NEW:
+						game.displayNew();
+						break;
+					case OPTIONS:
+						game.displayOptions();
+						break;
+					}
+				}
 			}
 		}
 	}

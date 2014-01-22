@@ -85,7 +85,7 @@ public class PurchaseManager extends JPanel{
 		for(int i = 0; i < 4; i++){
 			pane[i] = new JPanel();
 			GridLayout grid = new GridLayout(0,3);
-			grid.setHgap(10);
+			grid.setHgap(20);
 			pane[i].setLayout(grid);
 			panel.add(pane[i]);
 			panel.add(Box.createRigidArea(new Dimension(1,2)));
@@ -346,8 +346,9 @@ public class PurchaseManager extends JPanel{
 			else{
 				if(Constants.debugging) System.err.println("Not enough money");
 				NotEnoughMoneyException neme = new NotEnoughMoneyException(cost, state.money);
+				
 				// TODO: display to user that they cannot afford it or even disable buttons! with updateView
-				if(Constants.debugging) System.err.println("TODO: tell user that they can't afford it");
+				if(Constants.debugging) System.err.println("TODO: tell user that they can't afford it " + neme);
 			}
 			if(Constants.debugging) state.print();
 		}

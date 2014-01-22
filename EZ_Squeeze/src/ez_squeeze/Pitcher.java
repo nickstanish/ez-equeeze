@@ -11,16 +11,14 @@ public class Pitcher implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 9012722274127105674L;
-	private int lemons = 0;
-	private int ice = 0;
-	private int sugar = 0;
 	private int rIce = 0;
 	private int rLemons = 0;
 	private int rSugar = 0;
-	private int cups;
 	private int cups_per_pitcher = 14;
 	private int cupsLeft = 0;
-	Pitcher(){
+	private State state;
+	public Pitcher(State state){
+		this.state = state;
 		check();
 	}
 	public void serve(){
@@ -29,25 +27,25 @@ public class Pitcher implements Serializable{
 			refill();
 		}
 		cupsLeft -= 1;
-		cups--;
-		if (ice - rIce < 0){
+		state.cups--;
+		if (state.ice - rIce < 0){
 			rIce = 0;
 		}
-		ice -= rIce;
+		state.ice -= rIce;
 		System.out.println("served 1");
 		reset();
 	}
 	public void refill(){
-		if(lemons - rLemons < 0){
+		if(state.lemons - rLemons < 0){
 			//out of lemons
 			rLemons = 0;		
 		}
-		if (sugar - rSugar < 0){
+		if (state.sugar - rSugar < 0){
 			//outs of sugar
 			rSugar = 0;
 		}
-		lemons -= rLemons;
-		sugar -= rSugar;
+		state.lemons -= rLemons;
+		state.sugar -= rSugar;
 		cupsLeft = cups_per_pitcher;
 		System.out.println("refilled");
 		reset();
@@ -56,21 +54,17 @@ public class Pitcher implements Serializable{
 		cupsLeft = 0;
 	}
 	public void check(){
-		/*rLemons = EzSqueeze.getRecipeLemons();
+		/*
+		rLemons = EzSqueeze.getRecipeLemons();
 		rIce = EzSqueeze.getRecipeIce();
 		rSugar = EzSqueeze.getRecipeSugar();
-		cups = EzSqueeze.getCups();
-		lemons = EzSqueeze.getLemons();
-		ice = EzSqueeze.getIce();
-		sugar = EzSqueeze.getSugar();*/
+		*/
 	}
 	public void reset(){
-		/*EzSqueeze.setRecipeLemons(rLemons);
+		/* TODO: change to recipe.lemons 
+		 * EzSqueeze.setRecipeLemons(rLemons);
 		EzSqueeze.setRecipeIce(rIce);
 		EzSqueeze.setRecipeSugar(rSugar);
-		EzSqueeze.setCups(cups);
-		EzSqueeze.setLemons(lemons);
-		EzSqueeze.setIce(ice);
-		EzSqueeze.setSugar(sugar);*/
+*/
 	}
 }

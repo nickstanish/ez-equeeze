@@ -1,10 +1,9 @@
 package ez_squeeze;
 
-import static org.junit.Assert.*;
-import junit.framework.JUnit4TestAdapter;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
-import org.junit.runners.JUnit4;
 /**
  * Uses JUnit4 to test functionality of Day class
  * @author Nick Stanish
