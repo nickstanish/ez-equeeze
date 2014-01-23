@@ -1,11 +1,15 @@
 package ez_squeeze;
+
+import java.io.Serializable;
+
 /**
  * Encapsulates variables
  * @author Nick Stanish
  *
  */
-public class State {
+public class State implements Serializable{
 	public int lemons, ice, sugar, cups;
+	public Recipe recipe;
 	public double money;
 	public State(){
 		lemons = 0;
@@ -13,6 +17,7 @@ public class State {
 		sugar = 0;
 		cups = 0;
 		money = Constants.startingMoney;
+		recipe = new Recipe(2,2,2,0.25);
 	}
 	public void print(){
 		System.out.println("Lemons: " + lemons);

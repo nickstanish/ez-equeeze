@@ -3,7 +3,7 @@ package ez_squeeze;
 import java.io.Serializable;
 /**
  * GNU GPL v3
- * Copyright 2011-2012 Nick Stanish
+ * Copyright 2011-2014 Nick Stanish
  * @author Nick Stanish
  */
 
@@ -12,102 +12,62 @@ public class Recipe implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4336787500044640790L;
-	private int grade; //[-5,5]
-	private double x;
-	private double success;
-	private String flavor;
-	private String criticism;
-	/*
-	 * +/- 3, perfect
-	 * +/- 2, good
-	 * +/- 1, okay
-	 * 0, bad
-	 */
+	private static final long serialVersionUID = 4805393381914173418L;
+	public int grade = 0; // [-3,3], 0 is worst. Math.abs(grade) of 3 is best
+	public int lemons = 0;
+	public int sugar = 0;
+	public int ice = 0;
+	public double price = 0;
+	public Flavor flavor;
+	public Criticism criticism;
+	public enum Flavor{
+		Sweet, Sour, Vomit
+	}
+	public enum Criticism{
+		Bad, Okay, Good, Perfect
+	}
 	/**
-	 * Create a Recipe and grade/criticise it. The code is purposely intended to difficult to understand :)
+	 * Create a Recipe and grade/criticise it with a unique formula.
 	 * @param lemons
 	 * @param sugar
 	 */
-	public Recipe(int lemons, int sugar){
+	public Recipe(int lemons, int sugar, int ice, double price){
 		//put recipe into linear system that determines how sweet or sour a recipe is, and then 
 		//put the number into a bigger formula that determines how successful the recipe is
-		double a = -.429;
+		this.ice = ice;
+		this.lemons = lemons;
+		this.sugar = sugar;
+		this.price = price;
+		double a = -0.429;
 		double b = 0.381;
-		x = ( ( a * lemons ) + (b * sugar ) );
-		success = (2 * (((2 * power(x, 4))+ power(x, 2) + 2) / (power(x, 4) + 1))) - 4;
-		gradeRecipe();
-		x = a;
+		double x = ( ( a * lemons ) + (b * sugar ) ); // determines flavor
+		double success = (2 * (((2 * Math.pow(x, 4))+ Math.pow(x, 2) + 2) / (Math.pow(x, 4) + 1))) - 4;
+		gradeRecipe(x, success);
 	}
-    private double power(double num, int x){ //base number, to the power of x
-		double result;
-		result = num;
-		for(int a = 1; a < x; a++){
-			result *= num;
-		}
-		if (x == 0){
-			result = 1;
-		}
-		return result;
-	}
-	public void gradeRecipe(){
+    /**
+     * categorizes the recipe into a criticism, grade, and flavor
+     */
+	private void gradeRecipe(double x, double success){
+		grade = (x < 0) ? -1 : 1;
+		flavor = (x < 0) ? Flavor.Sour : Flavor.Sweet;
+		
 		if (success >= .9){
-			if (x < 0){
-				grade = -3;
-				criticism = "Perfect";
-				flavor = "sour";
-			}
-			else{
-				grade = 3;
-				criticism = "Perfect";
-				flavor = "sweet";
-			}
+			criticism = Criticism.Perfect;
+			grade *= 3;
 		}
 		else if (success >= .70){
-			if (x < 0){
-				grade = -2;
-				criticism = "Good";
-				flavor = "sour";
-			}
-			else{
-				grade = 2;
-				criticism = "Good";
-				flavor = "sweet";
-			}
+			criticism = Criticism.Good;
+			grade *= 2;
 		}
 		else if(success >= .40){
-			if (x < 0){
-				grade = -1;
-				criticism = "Okay";
-				flavor = "sour";
-			}
-			else{
-				grade = 1;
-				criticism = "Okay";
-				flavor = "sweet";
-			}
+			criticism = Criticism.Okay;
 		}
 		else{
 			grade = 0;
-			criticism = "Bad";
-			flavor = "vomit";
+			criticism = Criticism.Bad;
+			flavor = Flavor.Vomit;
 			
 		}
-	}
-	public double getX(){
-		return x;
-	}
-	public String getCriticism(){
-		return criticism;
-	}
-	public double getSuccess(){
-		return success;
-	}
-	public String getFlavor(){
-		return flavor;
-	}
-	public int getGrade(){
-		return grade;
 	}
 	
 }
