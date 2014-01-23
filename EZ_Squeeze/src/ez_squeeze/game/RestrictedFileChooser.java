@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ez_squeeze;
+package ez_squeeze.game;
 /*
  * GNU GPL v3
  * Copyright 2011-2012 Nick Stanish

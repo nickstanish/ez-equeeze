@@ -1,10 +1,11 @@
-package ez_squeeze;
+package ez_squeeze.game;
 
 import java.io.Serializable;
 /*
  * GNU GPL v3
  * Copyright 2011-2012 Nick Stanish
  */
+
 
 public class Pitcher implements Serializable{
 	/**

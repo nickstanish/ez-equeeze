@@ -1,6 +1,6 @@
-package ez_squeeze;
+package ez_squeeze.game;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Random;
 /**
  * GNU GPL v3
  * Copyright 2011-2012 Nick Stanish
@@ -26,9 +26,6 @@ public class Day implements Serializable{
 		catch(Exception e){
 			throw new Exception("Create Bad Day");
 		}
-	}
-	public enum Days{
-		Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
 	}
 	public String getDay(){
 		return day.name();

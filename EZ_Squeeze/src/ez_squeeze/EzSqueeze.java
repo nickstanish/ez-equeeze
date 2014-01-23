@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
+import ez_squeeze.game.Constants;
+import ez_squeeze.game.State;
 import ez_squeeze.topmenu.TopMenuScreen;
 
 public class EzSqueeze extends JFrame{

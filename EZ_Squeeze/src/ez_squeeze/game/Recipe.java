@@ -1,4 +1,4 @@
-package ez_squeeze;
+package ez_squeeze.game;
 
 import java.io.Serializable;
 /**

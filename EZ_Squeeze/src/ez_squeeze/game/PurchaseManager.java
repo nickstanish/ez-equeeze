@@ -19,9 +19,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
-
-import ez_squeeze.Constants;
-import ez_squeeze.State;
 /**
  * 
  * @author Nick Stanish

@@ -16,7 +16,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
+import ez_squeeze.game.Constants;
 import ez_squeeze.game.PurchaseManager;
+import ez_squeeze.game.State;
 /**
  * 
  * @author Nick Stanish

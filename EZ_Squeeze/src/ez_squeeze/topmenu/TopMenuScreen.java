@@ -18,8 +18,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import ez_squeeze.Constants;
 import ez_squeeze.EzSqueeze;
+import ez_squeeze.game.Constants;
 /**
  * This class encapsulates the top menu screen. It is drawn graphically
  * and gives opens for a new game, loading a saved game, instructions, 
