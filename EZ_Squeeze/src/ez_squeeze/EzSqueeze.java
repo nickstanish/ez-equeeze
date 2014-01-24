@@ -5,9 +5,11 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,6 +28,7 @@ public class EzSqueeze extends JFrame{
 	public JPanel topPanel, cardPanel, contentPane;
 	public JPanel menuCard, gameCard, optionsCard, helpCard, exitCard; // cards/views
 	public JLabel titleLabel;
+	public JFileChooser fileChooser;
 	public enum Cards{
 		MENU, GAME, OPTIONS, ABOUT, HELP, EXIT
 	}
@@ -48,6 +51,7 @@ public class EzSqueeze extends JFrame{
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		topPanel = new JPanel();
 		cardPanel = new JPanel();
+		fileChooser = new JFileChooser(".");
 		cardPanel.setLayout(new CardLayout(1, 1));
 		pane.add(contentPane);
 		contentPane.add(topPanel);
@@ -88,11 +92,29 @@ public class EzSqueeze extends JFrame{
 		// TODO Auto-generated method stub
 		
 	}
+	public void saveState(State state){
+		int val = fileChooser.showSaveDialog(this);
+		switch(val){
+		case JFileChooser.APPROVE_OPTION:
+			File file = fileChooser.getSelectedFile();
+			//TODO: save state to file
+			break;
+		case JFileChooser.CANCEL_OPTION:
+		default:
+		}
+	}
 	public void displayLoad() {
-		// TODO Auto-generated method stub
-		//first load
-		//then same as display new only with loaded state
-		
+		int val = fileChooser.showOpenDialog(this);
+		switch(val){
+		case JFileChooser.APPROVE_OPTION:
+			File file = fileChooser.getSelectedFile();
+			//TODO: load state from file
+			//create game from state
+			break;
+		case JFileChooser.CANCEL_OPTION:
+		default:
+		}
+
 	}
 	public void displayNew() {
 		GameScreen game = (GameScreen)gameCard;
