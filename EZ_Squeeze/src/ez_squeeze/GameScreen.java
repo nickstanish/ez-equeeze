@@ -18,6 +18,7 @@ import javax.swing.JToolBar;
 
 import ez_squeeze.game.Constants;
 import ez_squeeze.game.PurchaseManager;
+import ez_squeeze.game.RecipePanel;
 import ez_squeeze.game.State;
 /**
  * 
@@ -33,12 +34,15 @@ public class GameScreen extends JPanel{
 	public JToolBar bottomToolBar;
 	public JLabel lemonLabel, iceLabel, sugarLabel, cupLabel, walletLabel;
 	public boolean mediaFound = false;
+	public RecipePanel recipePanel;
 	public GameScreen(State state){
 		super();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.state = state;
 		this.add(new PurchaseManager(state));
-		this.add(Box.createRigidArea(new Dimension(1,250)));
+		this.add(Box.createRigidArea(new Dimension(1,50)));
+		recipePanel = new RecipePanel();
+		this.add(recipePanel);
 		bottomToolBar = new JToolBar(JToolBar.HORIZONTAL);
 		bottomToolBar.setFloatable(false);
 		bottomToolBar.setMaximumSize(new Dimension(Integer.MAX_VALUE,30));

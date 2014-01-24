@@ -2,9 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Nick/workspace/EZ-Squeeze Empire-1.02/EZ_Squeeze_Empire/dist/lib/AbsoluteLayout.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Nick/workspace/EZ-Squeeze Empire-1.02/EZ_Squeeze_Empire/dist/lib/appframework-1.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Nick/workspace/EZ-Squeeze Empire-1.02/EZ_Squeeze_Empire/dist/lib/swing-worker-1.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
