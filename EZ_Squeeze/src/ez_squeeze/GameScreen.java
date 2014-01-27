@@ -34,12 +34,14 @@ public class GameScreen extends JPanel{
 	public JToolBar bottomToolBar;
 	public JLabel lemonLabel, iceLabel, sugarLabel, cupLabel, walletLabel;
 	public boolean mediaFound = false;
+	public PurchaseManager purchaseManager;
 	public RecipePanel recipePanel;
 	public GameScreen(State state){
 		super();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.state = state;
-		this.add(new PurchaseManager(state));
+		this.purchaseManager = new PurchaseManager(this, state);
+		this.add(purchaseManager);
 		this.add(Box.createRigidArea(new Dimension(1,50)));
 		recipePanel = new RecipePanel();
 		this.add(recipePanel);
@@ -89,25 +91,15 @@ public class GameScreen extends JPanel{
             iceLabel = new JLabel("Ice: ");
             cupLabel = new JLabel("Cups: ");
         }
-		sugarLabel.setText(sugarLabel.getText() + Integer.MAX_VALUE);
-		//sugarLabel.setFont(Constants.normalFont);
-		cupLabel.setText(cupLabel.getText() + Integer.MAX_VALUE);
-		//cupLabel.setFont(Constants.normalFont);
-		iceLabel.setText(iceLabel.getText() + Integer.MAX_VALUE);
-		//iceLabel.setFont(Constants.normalFont);
-		lemonLabel.setText(lemonLabel.getText() + Integer.MAX_VALUE);
-		//lemonLabel.setFont(Constants.normalFont);
-		walletLabel.setText(walletLabel.getText() + Integer.MAX_VALUE);
-		//walletLabel.setFont(Constants.normalFont);
 		bottomToolBar.setLayout(new FlowLayout(FlowLayout.LEADING));
-		Dimension separator = new Dimension(20,1);
-		bottomToolBar.add(sugarLabel);
+		Dimension separator = new Dimension(15,1);
+		bottomToolBar.add(lemonLabel);
 		bottomToolBar.addSeparator(separator);
-		bottomToolBar.add(cupLabel);
+		bottomToolBar.add(sugarLabel);
 		bottomToolBar.addSeparator(separator);
 		bottomToolBar.add(iceLabel);
 		bottomToolBar.addSeparator(separator);
-		bottomToolBar.add(lemonLabel);
+		bottomToolBar.add(cupLabel);
 		bottomToolBar.addSeparator(separator);
 		bottomToolBar.add(walletLabel);
 		bottomToolBar.addSeparator(separator);
@@ -122,13 +114,13 @@ public class GameScreen extends JPanel{
 		if(mediaFound){
 			lemonLabel.setText(state.lemons + "");
 			iceLabel.setText(state.ice + "");
-			walletLabel.setText(state.money + ""); // TODO: format to money
+			walletLabel.setText(Constants.priceFormat.format(state.money));
 			sugarLabel.setText(state.sugar + "");
 			cupLabel.setText(state.cups + "");
 		}
 		else{
 			sugarLabel.setText("Sugar: " + state.sugar);
-            walletLabel.setText("Money: " + state.money);
+            walletLabel.setText("Money: " + Constants.priceFormat.format(state.money));
             lemonLabel.setText("Lemons: " + state.lemons);
             iceLabel.setText("Ice: " + state.ice);
             cupLabel.setText("Cups: "+ state.cups);
@@ -142,6 +134,7 @@ public class GameScreen extends JPanel{
 	 */
 	public void loadState(State state){
 		this.state = state;
+		this.purchaseManager.state = state;
 		updateStateLabels(state);
 	}
 	public static void main(String[] args){

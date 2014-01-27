@@ -1,9 +1,12 @@
-package ez_squeeze.game;
+package ez_squeeze.game.people;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
+import ez_squeeze.game.Constants;
+import ez_squeeze.game.Days;
+import ez_squeeze.game.Recipe;
 import ez_squeeze.game.Recipe.Criticism;
 import ez_squeeze.game.Recipe.Flavor;
 public class Person implements Serializable{
@@ -13,19 +16,22 @@ public class Person implements Serializable{
 	 */
 
 	private static final long serialVersionUID = -8607643105145232932L;
-	private double thirstiness;
-	private Flavor flavor;
-	private String sex;
-	private String name;
-	private String socialClass;
-	private ArrayList<Days> schedule = new ArrayList<Days>();
-	private String reason = "";
-	private String reaction = "";
-	public void Scheduler(){
-		Random random = new Random();
+	public double thirstiness;
+	public Flavor flavor;
+	public Sex sex;
+	public String name;
+	public String socialClass;
+	public ArrayList<Days> schedule = new ArrayList<Days>();
+	public String reason = "";
+	public String reaction = "";
+	/**
+	 * creates a schedule for the person
+	 * TODO: make it impossible to have an empty schedule
+	 */
+	public void scheduler(){
 		for(int a = 0; a<7;a++){
-			if (random.nextDouble() >= random.nextDouble()){
-				schedule.add(Days.values()[a]);
+			if (Constants.random.nextBoolean()){
+				schedule.add(Days.values()[a]); //TODO: optimize by creating only a single instance of array instead of copying over and over
 			}
 		}
 	}
@@ -77,12 +83,11 @@ public class Person implements Serializable{
 	}
 	//schedule
 	public Person(){
-		sex = new Sex().getSex();
-		name = new Name(sex).getName();
-		Scheduler();
-		Random rdm = new Random();
-		thirstiness = rdm.nextDouble() - .3;
-		double value = rdm.nextDouble();
+		sex = Sex.randomSex();
+		name = NameFactory.createName(sex);
+		scheduler();
+		thirstiness = Constants.random.nextDouble() - .3;
+		double value = Constants.random.nextDouble();
 		if (value < 0.55){
 			wallet = 0.60;
 			socialClass = "lower";
@@ -95,7 +100,7 @@ public class Person implements Serializable{
 			wallet = 1.50;
 			socialClass = "upper";
 		}
-		value = rdm.nextDouble();
+		value = Constants.random.nextDouble();
 		if (value >= .5){
 			flavor = Flavor.Sour;
 		}
@@ -126,9 +131,8 @@ public class Person implements Serializable{
 	public boolean willPurchase(String[] array){ //array item must include 1.price
 		boolean purchase = false;
 		if (Double.parseDouble(array[0]) <= wallet){ 
-			Random rdm = new Random();
-			if (rdm.nextDouble() >= thirstiness){//thirst at this time is higher than that needed to require a drink
-				if (rdm.nextDouble() <= (satisfaction / 80)){
+			if (Constants.random.nextDouble() >= thirstiness){//thirst at this time is higher than that needed to require a drink
+				if (Constants.random.nextDouble() <= (satisfaction / 80)){
 					purchase = true;	
 				}
 				else{
@@ -148,12 +152,6 @@ public class Person implements Serializable{
 	}
 	public String getSocialClass(){
 		return socialClass;
-	}
-	public void setSex(String gender){
-		sex = gender;
-	}
-	public String getSex(){
-		return sex;
 	}
 	public void giveBonus(double bonus){
 		wallet += bonus;
@@ -177,45 +175,9 @@ public class Person implements Serializable{
 	public Flavor getFlavor(){
 		return flavor;
 	}
-}
-class Sex implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5820069039464963236L;
-	private String sex;
-	public Sex(){
-		Random rdm = new Random();
-		if (rdm.nextInt(101)<= 50){
-			sex = "Male";
-		}
-		else{
-			sex = "Female";
-		}
+	public String toString(){
+		return name + ":\n\t" + sex.name() + "\n\t" + schedule + "\n\t" + socialClass + " class";
 		
 	}
-	public String getSex(){
-			return sex;
-		}
-	
 }
-class Name implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7016407411617595373L;
-	private String name;
-	public Name(String sex){
-		Random rand = new Random();
-		if (sex == "Male"){
-			name = Constants.maleNames[rand.nextInt(Constants.maleNames.length)];
-		}
-		else{
-			name = Constants.femaleNames[rand.nextInt(Constants.femaleNames.length)];
-		}
-		name += " " + Constants.lastNames[rand.nextInt(Constants.lastNames.length)];
-	}
-	public String getName(){
-		return name;
-	}
-}
+

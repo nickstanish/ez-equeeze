@@ -1,6 +1,9 @@
 package ez_squeeze.game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import ez_squeeze.game.people.Person;
 
 /**
  * Encapsulates variables
@@ -11,6 +14,7 @@ public class State implements Serializable{
 	public int lemons, ice, sugar, cups;
 	public Recipe recipe;
 	public double money;
+	public ArrayList<Person> persons = new ArrayList<Person>();
 	public State(){
 		lemons = 0;
 		ice = 0;
@@ -18,12 +22,21 @@ public class State implements Serializable{
 		cups = 0;
 		money = Constants.startingMoney;
 		recipe = new Recipe(2,2,2,0.25);
+		for(int i = 0; i < Constants.startingPersons; i++){
+			persons.add(new Person());
+		}
+		printCustomers();
 	}
 	public void print(){
-		System.out.println("Lemons: " + lemons);
-		System.out.println("Sugar: " + sugar);
-		System.out.println("Ice: " + ice);
-		System.out.println("Cups: " + cups);
-		System.out.println("Wallet: " + money);
+		Constants.LOG("Lemons: " + lemons);
+		Constants.LOG("Sugar: " + sugar);
+		Constants.LOG("Ice: " + ice);
+		Constants.LOG("Cups: " + cups);
+		Constants.LOG("Wallet: " + money);
+	}
+	public void printCustomers(){
+		for(Person person: persons){
+			Constants.LOG(person.toString());
+		}
 	}
 }

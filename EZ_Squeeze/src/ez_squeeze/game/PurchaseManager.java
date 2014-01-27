@@ -19,12 +19,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
+
+import ez_squeeze.GameScreen;
 /**
  * 
  * @author Nick Stanish
  *
  */
 public class PurchaseManager extends JPanel{
+	//TODO: add more accuracy to buying items (maybe * 100 and then +/- before converting back to decimal to avoid rounding 0.06999999999999651 )
+	// TODO: or make everything even
+	// TODO: stats: amounts purchased, $ spent, clicks to buybutton
 	/**
 	 * 
 	 */
@@ -34,8 +39,8 @@ public class PurchaseManager extends JPanel{
 	public JButton smallButton, mediumButton, largeButton;
 	public JLabel smallSizeLabel, smallPriceLabel, mediumSizeLabel, mediumPriceLabel, largeSizeLabel, largePriceLabel;
 	public ButtonGroup purchaseToggles;
-	public DecimalFormat priceFormat = new DecimalFormat("$0.00");
 	public PurchaseItems lastSelected = PurchaseItems.Lemons;
+	public GameScreen game;
 	/**
 	 * 
 	 * Possible items to buy; simplifies checks with switches
@@ -56,8 +61,9 @@ public class PurchaseManager extends JPanel{
 	 * Creates a jpanel manager for purchasing items and adding them to the game state
 	 * @param state: game state that is updated to reflect purchases in panel
 	 */
-	public PurchaseManager(State state){
+	public PurchaseManager(GameScreen game, State state){
 		super();
+		this.game = game;
 		this.state = state;
 		initComponents();
 	
@@ -91,18 +97,21 @@ public class PurchaseManager extends JPanel{
 		smallButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				purchase(PurchaseSize.Small);
+				if(game != null) game.updateStateLabels(state);
 			}
 		});
 		mediumButton = new JButton("Buy");
 		mediumButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				purchase(PurchaseSize.Medium);
+				if(game != null) game.updateStateLabels(state);
 			}
 		});
 		largeButton = new JButton("Buy");
 		largeButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				purchase(PurchaseSize.Large);
+				if(game != null) game.updateStateLabels(state);
 			}
 		});
 		smallSizeLabel = new JLabel("" + Integer.MAX_VALUE);
@@ -164,14 +173,14 @@ public class PurchaseManager extends JPanel{
 		Enumeration<AbstractButton> elements = purchaseToggles.getElements();
 		while(elements.hasMoreElements()){
 			AbstractButton toggle = elements.nextElement();
-			if(Constants.debugging) System.out.println(toggle.isSelected() + " \t" + toggle.getText());
+			Constants.LOG(toggle.isSelected() + " \t" + toggle.getText());
 			if(toggle.isSelected()){
 				try{
 					PurchaseItems item = PurchaseItems.valueOf(toggle.getText());
 					updateView(item);
 				}
 				catch(Exception e){
-					if(Constants.debugging) System.out.println(e);
+					Constants.LOG(e.getMessage());
 					updateView(PurchaseItems.Lemons);
 				}
 			}
@@ -188,38 +197,38 @@ public class PurchaseManager extends JPanel{
 		switch(item){
 			case Cups:
 				smallSizeLabel.setText(""  + Constants.smallSizeCups);
-				smallPriceLabel.setText(priceFormat.format(Constants.smallPriceCups));
+				smallPriceLabel.setText(Constants.priceFormat.format(Constants.smallPriceCups));
 				mediumSizeLabel.setText("" + Constants.mediumSizeCups);
-				mediumPriceLabel.setText(priceFormat.format(Constants.mediumPriceCups));
+				mediumPriceLabel.setText(Constants.priceFormat.format(Constants.mediumPriceCups));
 				largeSizeLabel.setText("" + Constants.largeSizeCups);
-				largePriceLabel.setText(priceFormat.format(Constants.largePriceCups));
+				largePriceLabel.setText(Constants.priceFormat.format(Constants.largePriceCups));
 				purchaseToggles.setSelected(cupsButton.getModel(), true);
 				break;
 			case Ice:
 				smallSizeLabel.setText(""  + Constants.smallSizeIce);
-				smallPriceLabel.setText(priceFormat.format(Constants.smallPriceIce));
+				smallPriceLabel.setText(Constants.priceFormat.format(Constants.smallPriceIce));
 				mediumSizeLabel.setText("" + Constants.mediumSizeIce);
-				mediumPriceLabel.setText(priceFormat.format(Constants.mediumPriceIce));
+				mediumPriceLabel.setText(Constants.priceFormat.format(Constants.mediumPriceIce));
 				largeSizeLabel.setText("" + Constants.largeSizeIce);
-				largePriceLabel.setText(priceFormat.format(Constants.largePriceIce));
+				largePriceLabel.setText(Constants.priceFormat.format(Constants.largePriceIce));
 				purchaseToggles.setSelected(iceButton.getModel(), true);
 				break;
 			case Sugar:
 				smallSizeLabel.setText(""  + Constants.smallSizeSugar);
-				smallPriceLabel.setText(priceFormat.format(Constants.smallPriceSugar));
+				smallPriceLabel.setText(Constants.priceFormat.format(Constants.smallPriceSugar));
 				mediumSizeLabel.setText("" + Constants.mediumSizeSugar);
-				mediumPriceLabel.setText(priceFormat.format(Constants.mediumPriceSugar));
+				mediumPriceLabel.setText(Constants.priceFormat.format(Constants.mediumPriceSugar));
 				largeSizeLabel.setText("" + Constants.largeSizeSugar);
-				largePriceLabel.setText(priceFormat.format(Constants.largePriceSugar));
+				largePriceLabel.setText(Constants.priceFormat.format(Constants.largePriceSugar));
 				purchaseToggles.setSelected(sugarButton.getModel(), true);
 				break;
 			case Lemons:
 				smallSizeLabel.setText(""  + Constants.smallSizeLemons);
-				smallPriceLabel.setText(priceFormat.format(Constants.smallPriceLemons));
+				smallPriceLabel.setText(Constants.priceFormat.format(Constants.smallPriceLemons));
 				mediumSizeLabel.setText("" + Constants.mediumSizeLemons);
-				mediumPriceLabel.setText(priceFormat.format(Constants.mediumPriceLemons));
+				mediumPriceLabel.setText(Constants.priceFormat.format(Constants.mediumPriceLemons));
 				largeSizeLabel.setText("" + Constants.largeSizeLemons);
-				largePriceLabel.setText(priceFormat.format(Constants.largePriceLemons));
+				largePriceLabel.setText(Constants.priceFormat.format(Constants.largePriceLemons));
 				purchaseToggles.setSelected(lemonsButton.getModel(), true);
 				break;	
 		}
@@ -234,7 +243,7 @@ public class PurchaseManager extends JPanel{
 	 */
 	public void purchase(PurchaseSize size){
 		if(size == null){
-			if(Constants.debugging) System.out.println("Null purchase size.");
+			Constants.LOG("Null purchase size.");
 			return;
 		}
 		int amount = 0;
@@ -361,7 +370,7 @@ public class PurchaseManager extends JPanel{
 	private int checkAddItem(int amount, int add, PurchaseItems item){
 		if(amount > Integer.MAX_VALUE - add){
 			 amount = Integer.MAX_VALUE;
-			 if(Constants.debugging) System.out.println("Bought max number of " + item.name() + "\nTODO show error");
+			 Constants.LOG("Bought max number of " + item.name() + "\nTODO show error");
 			 // TODO: show error - cannot buy more
 			 // TODO: make test
 		 }
@@ -375,7 +384,7 @@ public class PurchaseManager extends JPanel{
 	}
 	public static void main(String[] args){
 		JFrame frame = new JFrame("Purchase Manager");
-		frame.getContentPane().add(new PurchaseManager(new State()));
+		frame.getContentPane().add(new PurchaseManager(null, new State()));
 		frame.pack();
 		frame.setVisible(true);
 		frame.setSize(400,600);

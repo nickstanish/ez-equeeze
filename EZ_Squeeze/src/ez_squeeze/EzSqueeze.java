@@ -26,7 +26,8 @@ public class EzSqueeze extends JFrame{
 	private static final long serialVersionUID = 2902265810787080470L;
 	public static final String version = "3.0.0";
 	public JPanel topPanel, cardPanel, contentPane;
-	public JPanel menuCard, gameCard, optionsCard, helpCard, exitCard; // cards/views
+	public JPanel menuCard, optionsCard, helpCard, exitCard; // cards/views
+	public GameScreen gameCard;
 	public JLabel titleLabel;
 	public JFileChooser fileChooser;
 	public enum Cards{
@@ -117,8 +118,7 @@ public class EzSqueeze extends JFrame{
 
 	}
 	public void displayNew() {
-		GameScreen game = (GameScreen)gameCard;
-		game.loadState(new State());
+		gameCard.loadState(new State());
 		CardLayout cl = (CardLayout)(cardPanel.getLayout());
         cl.show(cardPanel, Cards.GAME.name());
 		
