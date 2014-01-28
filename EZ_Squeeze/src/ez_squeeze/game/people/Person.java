@@ -2,13 +2,11 @@ package ez_squeeze.game.people;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Random;
 
 import ez_squeeze.game.Constants;
-import ez_squeeze.game.Days;
-import ez_squeeze.game.Recipe;
 import ez_squeeze.game.Recipe.Criticism;
 import ez_squeeze.game.Recipe.Flavor;
+import forecast.Days;
 public class Person implements Serializable{
 	/*
 	 * GNU GPL v3
@@ -176,8 +174,7 @@ public class Person implements Serializable{
 		return flavor;
 	}
 	public String toString(){
-		return name + ":\n\t" + sex.name() + "\n\t" + schedule + "\n\t" + socialClass + " class";
-		
+		return name + ":\n\t" + sex.name() + "\n\t" + schedule + "\n\t" + socialClass + " class";	
 	}
 }
 

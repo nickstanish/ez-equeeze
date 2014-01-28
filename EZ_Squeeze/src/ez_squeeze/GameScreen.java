@@ -21,6 +21,7 @@ import javax.swing.JToolBar;
 
 import ez_squeeze.game.Constants;
 import ez_squeeze.game.PurchaseManager;
+import ez_squeeze.game.RecipeInputException;
 import ez_squeeze.game.RecipePanel;
 import ez_squeeze.game.State;
 /**
@@ -94,7 +95,13 @@ public class GameScreen extends JPanel{
 	protected void startDay() {
 		// TODO start day logic
 		// grab recipe values
-		state.recipe = recipePanel.getRecipe();
+		try{
+			state.recipe = recipePanel.getRecipe();
+			Constants.LOG(state.recipe.toString());
+		}
+		catch(RecipeInputException r){
+			Constants.LOG(r.toString());
+		}
 		updateStateLabels(state);
 		
 	}

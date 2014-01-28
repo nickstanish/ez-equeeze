@@ -97,12 +97,12 @@ public class RecipePanel extends JPanel{
 		this.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1, true));
 		this.add(paddedPanel, BorderLayout.CENTER);
 	}
-	public Recipe getRecipe(){
+	public Recipe getRecipe() throws RecipeInputException{
 		int lemons = (int)getTextWrapper(lemonField);
 		int sugar  = (int)getTextWrapper(sugarField);
 		int ice    = (int)getTextWrapper(iceField);
 		double price =    getTextWrapper(priceField);
-		if(lemons < 0 || sugar < 0 || ice < 0 || price < 0) return null;
+		if(lemons < 0 || sugar < 0 || ice < 0 || price < 0) throw new RecipeInputException();
 		return new Recipe(lemons, sugar, ice, price);
 	}
 	
