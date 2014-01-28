@@ -2,6 +2,8 @@ package ez_squeeze;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -31,25 +34,69 @@ public class GameScreen extends JPanel{
 	 */
 	private static final long serialVersionUID = 5809625874051644833L;
 	public State state;
+	public JButton menuButton, saveButton, startButton;
+	public JPanel navPanel, startPanel;
 	public JToolBar bottomToolBar;
 	public JLabel lemonLabel, iceLabel, sugarLabel, cupLabel, walletLabel;
 	public boolean mediaFound = false;
+	public EzSqueeze game;
 	public PurchaseManager purchaseManager;
 	public RecipePanel recipePanel;
-	public GameScreen(State state){
+	public GameScreen(EzSqueeze game, State state){
 		super();
+		this.game = game;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.state = state;
+		navPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
+		this.add(navPanel);
+		initNav();
 		this.purchaseManager = new PurchaseManager(this, state);
 		this.add(purchaseManager);
 		this.add(Box.createRigidArea(new Dimension(1,50)));
 		recipePanel = new RecipePanel();
 		this.add(recipePanel);
+		startPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
+		initStart();
+		this.add(startPanel);
 		bottomToolBar = new JToolBar(JToolBar.HORIZONTAL);
 		bottomToolBar.setFloatable(false);
 		bottomToolBar.setMaximumSize(new Dimension(Integer.MAX_VALUE,30));
 		this.add(bottomToolBar);
 		initBottom();
+	}
+	private void initNav(){
+		menuButton = 	new JButton("Menu");
+		menuButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(game != null){
+					game.displayMenuFromGame();
+				}
+			}
+		});
+		saveButton = 	new JButton("Save");
+		saveButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				game.saveState(state);
+			}
+		});
+		navPanel.add(menuButton);
+		navPanel.add(saveButton);
+	}
+	private void initStart(){
+		startButton =	new JButton("Start");
+		startPanel.add(startButton);
+		startButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				startDay(); 
+			}
+		});
+	}
+	protected void startDay() {
+		// TODO start day logic
+		// grab recipe values
+		state.recipe = recipePanel.getRecipe();
+		updateStateLabels(state);
+		
 	}
 	private void initBottom() {
 		//bottomToolBar.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
@@ -140,7 +187,7 @@ public class GameScreen extends JPanel{
 	public static void main(String[] args){
 		JFrame window = new JFrame("GameScreen");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GameScreen game = new GameScreen(new State());
+		GameScreen game = new GameScreen(null, new State());
 		window.getContentPane().add(game);
 		window.pack();
 		window.setVisible(true);

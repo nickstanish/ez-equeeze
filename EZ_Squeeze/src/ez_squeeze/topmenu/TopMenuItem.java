@@ -13,7 +13,9 @@ import java.awt.geom.Rectangle2D;
 public class TopMenuItem{
 	public Item item;
 	public boolean hovered = false;
+	public boolean enabled = true;
 	public int index;
+	public Color disabledColor = Color.lightGray;
 	public Color highlightColor = Color.cyan;
 	public Color baseColor = Color.black;
 	public Point base;
@@ -21,7 +23,7 @@ public class TopMenuItem{
 	public Rectangle2D.Double area = new Rectangle2D.Double();
 	public Rectangle2D.Double paddedArea = new Rectangle2D.Double();
 	public enum Item{
-		NEW, LOAD, OPTIONS, HELP, ABOUT, EXIT
+		CONTINUE, NEW, LOAD, OPTIONS, HELP, ABOUT, EXIT
 	}
 	/**
 	 * 
@@ -38,7 +40,7 @@ public class TopMenuItem{
 		System.out.println(rect.getX() + " " + rect.getY() + " " + rect.getWidth() + " " + rect.getHeight());
 	}
 	public boolean hovered(Point p){
-		hovered = area.contains(p);
+		hovered = area.contains(p) && enabled;
 		return hovered;
 	}
 	public void draw(Graphics2D g) {
@@ -51,7 +53,7 @@ public class TopMenuItem{
 			g.setColor(highlightColor);
 			g.fill(paddedArea);
 		}
-		g.setColor(baseColor);
+		g.setColor(enabled ? baseColor : disabledColor);
 		g.drawString(item.name(), (int) base.x, (int)(base.y + (index + 1) * (height + 1)));
 		
 		

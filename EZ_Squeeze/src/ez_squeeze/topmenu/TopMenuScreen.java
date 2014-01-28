@@ -37,7 +37,8 @@ public class TopMenuScreen extends JPanel implements MouseListener, MouseMotionL
 	public Point base = new Point(50,50);
 	public int fontSize = 36;
 	public Font font = new Font(Font.SERIF, Font.BOLD, fontSize);
-	EzSqueeze game;
+	public EzSqueeze game;
+	public TopMenuItem continueItem = null; // reference to reactivate later, because needs to be disabled by default
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Top Menu Screen");
 		frame.getContentPane().add(new TopMenuScreen(null));
@@ -52,6 +53,10 @@ public class TopMenuScreen extends JPanel implements MouseListener, MouseMotionL
 		this.game = game;
 		for(TopMenuItem.Item item : TopMenuItem.Item.values()){
 			TopMenuItem menuItem = new TopMenuItem( item, menuItems.size(), base);
+			if(menuItem.item == TopMenuItem.Item.CONTINUE){
+				menuItem.enabled = false;
+				continueItem = menuItem;
+			}
 			menuItems.add(menuItem);
 		}
 		addMouseListener(this);
@@ -114,6 +119,11 @@ public class TopMenuScreen extends JPanel implements MouseListener, MouseMotionL
 						break;
 					case OPTIONS:
 						game.displayOptions();
+						break;
+					case CONTINUE:
+						game.displayContinue();
+						break;
+					default:
 						break;
 					}
 				}
