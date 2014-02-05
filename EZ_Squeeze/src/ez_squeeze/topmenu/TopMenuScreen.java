@@ -57,6 +57,16 @@ public class TopMenuScreen extends JPanel implements MouseListener, MouseMotionL
 				menuItem.enabled = false;
 				continueItem = menuItem;
 			}
+			//TODO implement these and remove 
+			if(menuItem.item == TopMenuItem.Item.OPTIONS){
+				menuItem.enabled = false;
+			}
+			if(menuItem.item == TopMenuItem.Item.ABOUT){
+				menuItem.enabled = false;
+			}
+			if(menuItem.item == TopMenuItem.Item.HELP){
+				menuItem.enabled = false;
+			}
 			menuItems.add(menuItem);
 		}
 		addMouseListener(this);

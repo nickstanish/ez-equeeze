@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import ez_squeeze.game.Constants;
 import ez_squeeze.game.Recipe.Criticism;
 import ez_squeeze.game.Recipe.Flavor;
+import forecast.Day;
 import forecast.Days;
 public class Person implements Serializable{
 	/*
@@ -22,11 +23,16 @@ public class Person implements Serializable{
 	public ArrayList<Days> schedule = new ArrayList<Days>();
 	public String reason = "";
 	public String reaction = "";
+	public double wallet;
+	public double satisfaction = 50;
+	private double experience = 0;
+	
+	private double patience;
 	/**
 	 * creates a schedule for the person
 	 * TODO: make it impossible to have an empty schedule
 	 */
-	public void scheduler(){
+	private void scheduler(){
 		for(int a = 0; a<7;a++){
 			if (Constants.random.nextBoolean()){
 				schedule.add(Days.values()[a]); //TODO: optimize by creating only a single instance of array instead of copying over and over
@@ -52,8 +58,7 @@ public class Person implements Serializable{
 			reaction = ":D";
 			break;
 		}
-		temperature = ((temperature - 70) / 10) + 1;
-		int iceNeeded = formatInt(temperature);
+		int iceNeeded = (int)((temperature - 70) / 10) + 1;
 		if(ice >= iceNeeded && ice <= iceNeeded + 3){
 			experience +=  Constants.enough_ice;
 		}
@@ -63,28 +68,18 @@ public class Person implements Serializable{
 		if (this.flavor == flavor){
 			experience +=  Constants.my_flavor;
 		}
+		satisfaction = 50 * ((experience / Math.sqrt((experience*experience)+1)) + 1);
 		
 	}
 	public String getReaction(){
 		return reaction;
-	}
-	private double wallet;
-	private double satisfaction = 50;
-	private double experience = 0;
-	
-	private double patience;
-	private int formatInt(double formatThis){ //put in a double and get a integer
-	   int formatted = 0;
-	   DecimalFormat form = new DecimalFormat("#");
-	   formatted = Integer.valueOf(form.format(formatThis));
-	   return formatted;
 	}
 	//schedule
 	public Person(){
 		sex = Sex.randomSex();
 		name = NameFactory.createName(sex);
 		scheduler();
-		thirstiness = Constants.random.nextDouble() - .3;
+		thirstiness = Math.abs(Constants.random.nextDouble() - .3);
 		double value = Constants.random.nextDouble();
 		if (value < 0.55){
 			wallet = 0.60;
@@ -98,39 +93,22 @@ public class Person implements Serializable{
 			wallet = 1.50;
 			socialClass = "upper";
 		}
-		value = Constants.random.nextDouble();
-		if (value >= .5){
-			flavor = Flavor.Sour;
-		}
-		else{
-			flavor = Flavor.Sweet;
-		}
-			
+		flavor = Constants.random.nextBoolean() ? Flavor.Sour : Flavor.Sweet;
 	}
 	public double getThirstiness(){
 		return thirstiness;
 	}
-	public void calcSatisfaction(){
-		satisfaction = 50 * ((experience / Math.sqrt((experience*experience)+1)) + 1);
-	}
 	public String getReason(){
 		return reason;
 	}
-	public ArrayList<Days> getSchedule(){
-		return schedule;
+	public boolean visits(Day day){
+		return schedule.contains(day.day);
 	}
-	public boolean visits(String day){
-		boolean visit = false;
-		if (schedule.contains(day)){
-			visit = true;
-		}
-		return visit;
-	}
-	public boolean willPurchase(String[] array){ //array item must include 1.price
+	public boolean willPurchase(double price){
 		boolean purchase = false;
-		if (Double.parseDouble(array[0]) <= wallet){ 
+		if (price <= wallet){ 
 			if (Constants.random.nextDouble() >= thirstiness){//thirst at this time is higher than that needed to require a drink
-				if (Constants.random.nextDouble() <= (satisfaction / 80)){
+				if (Constants.random.nextDouble() <= (satisfaction / 80.0)){
 					purchase = true;	
 				}
 				else{
@@ -148,30 +126,8 @@ public class Person implements Serializable{
 		}
 		return purchase;
 	}
-	public String getSocialClass(){
-		return socialClass;
-	}
 	public void giveBonus(double bonus){
 		wallet += bonus;
-	}
-	public double getWallet(){
-		return wallet;
-	}
-	public String getName(){
-		return name;
-	}
-	public double getSatisfaction(){
-		calcSatisfaction();
-		return satisfaction;
-	}
-	public void giveSatisfaction(double add){
-		satisfaction += add;
-	}
-	public double getPatience(){
-		return patience;
-	}
-	public Flavor getFlavor(){
-		return flavor;
 	}
 	public String toString(){
 		return name + ":\n\t" + sex.name() + "\n\t" + schedule + "\n\t" + socialClass + " class";	

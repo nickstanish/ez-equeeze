@@ -77,7 +77,7 @@ public class GameScreen extends JPanel{
 		saveButton = 	new JButton("Save");
 		saveButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				game.saveState(state);
+				if(game != null) game.saveState(state);
 			}
 		});
 		navPanel.add(menuButton);

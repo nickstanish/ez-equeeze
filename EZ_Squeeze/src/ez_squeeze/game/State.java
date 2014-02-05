@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import ez_squeeze.game.people.Person;
+import forecast.Day;
+import forecast.Forecast;
 
 /**
  * Encapsulates variables
@@ -14,6 +16,9 @@ public class State implements Serializable{
 	public int lemons, ice, sugar, cups;
 	public Recipe recipe;
 	public double money;
+	public Day day = new Day();
+	public Forecast forecast = new Forecast();
+	public Stats stats = new Stats();
 	public ArrayList<Person> persons = new ArrayList<Person>();
 	public State(){
 		lemons = 0;
@@ -38,5 +43,9 @@ public class State implements Serializable{
 		for(Person person: persons){
 			Constants.LOG(person.toString());
 		}
+	}
+	public void nextDay(){
+		day.nextDay();
+		forecast = new Forecast();
 	}
 }
