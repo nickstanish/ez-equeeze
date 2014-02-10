@@ -1,6 +1,5 @@
 package ez_squeeze.game.people;
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import ez_squeeze.game.Constants;
@@ -26,8 +25,6 @@ public class Person implements Serializable{
 	public double wallet;
 	public double satisfaction = 50;
 	private double experience = 0;
-	
-	private double patience;
 	/**
 	 * creates a schedule for the person
 	 * TODO: make it impossible to have an empty schedule

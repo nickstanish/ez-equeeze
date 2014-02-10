@@ -8,5 +8,18 @@ import javax.swing.JPanel;
  *
  */
 public class ErrorNoticePanel extends JPanel{
-//TODO
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1562596972645382785L;
+	//TODO
+	public ErrorNoticePanel(){
+		super();
+		//
+	}
+	public void displayError(String s){
+		Constants.LOGERROR(s);
+		//TODO
+	}
 }

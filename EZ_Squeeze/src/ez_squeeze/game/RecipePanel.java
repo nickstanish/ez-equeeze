@@ -7,7 +7,6 @@ import java.awt.FlowLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -52,12 +51,10 @@ public class RecipePanel extends JPanel{
 
 	public RecipePanel(){
 		super();
-		this.setLayout(new BorderLayout());
-		JPanel paddedPanel = new JPanel();
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.LEADING));
-		paddedPanel.setLayout(new BoxLayout(paddedPanel, BoxLayout.Y_AXIS));
-		recipeLabel = new JLabel("Recipe:");
+		recipeLabel = new JLabel("Recipe: ");
 		lemonLabel = new JLabel("Lemons");
 		iceLabel = new JLabel("Ice");
 		sugarLabel = new JLabel("Sugar");
@@ -88,14 +85,12 @@ public class RecipePanel extends JPanel{
 		pricePanel.add(priceField);
 		recipeLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panel.setAlignmentX(Component.LEFT_ALIGNMENT);
-		paddedPanel.add(recipeLabel);
+		this.add(recipeLabel);
 		panel.add(lemonPanel);
 		panel.add(sugarPanel);
 		panel.add(icePanel);
 		panel.add(pricePanel);
-		paddedPanel.add(panel);
-		this.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1, true));
-		this.add(paddedPanel, BorderLayout.CENTER);
+		this.add(panel, BorderLayout.CENTER);
 	}
 	public Recipe getRecipe() throws RecipeInputException{
 		int lemons = (int)getTextWrapper(lemonField);
@@ -110,7 +105,7 @@ public class RecipePanel extends JPanel{
 		double n;
 		try{
 			n = Double.parseDouble(text.getText());
-			text.setBackground(Color.lightGray);
+			text.setBackground(Color.white);
 			
 			return n;
 		}

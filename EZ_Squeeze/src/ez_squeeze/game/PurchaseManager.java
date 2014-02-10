@@ -1,16 +1,13 @@
 package ez_squeeze.game;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 import java.util.Enumeration;
 
 import javax.swing.AbstractButton;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -73,12 +70,9 @@ public class PurchaseManager extends JPanel{
 	 * split into several methods for clarity
 	 */
 	private void initComponents(){
-		JPanel root = new JPanel();
-		this.add(root);
-		root.setLayout(new BoxLayout(root,BoxLayout.Y_AXIS));
-		root.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-		initToggles(root);
-		initItemList(root);
+		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+		initToggles(this);
+		initItemList(this);
 	}
 	private void initItemList(JPanel root) {
 		JPanel paddingPanel = new JPanel();
@@ -137,7 +131,6 @@ public class PurchaseManager extends JPanel{
 		
 	}
 	private void initToggles(JPanel root){
-		JPanel paddingPanel = new JPanel();
 		ActionListener toggleListener = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				updateView();
@@ -159,12 +152,14 @@ public class PurchaseManager extends JPanel{
 		FlowLayout flowLayout = new FlowLayout(FlowLayout.LEADING);
 		flowLayout.setHgap(0);
 		JPanel togglePanel = new JPanel(flowLayout);
+		togglePanel.add(Box.createRigidArea(new Dimension(2,1)));
+		togglePanel.add(new JLabel("Purchase "));
+		togglePanel.add(Box.createRigidArea(new Dimension(5,1)));
 		togglePanel.add(lemonsButton);
 		togglePanel.add(sugarButton);
 		togglePanel.add(iceButton);
 		togglePanel.add(cupsButton);
-		paddingPanel.add(togglePanel);
-		root.add(paddingPanel);
+		root.add(togglePanel);
 	}
 	/**
 	 * responds to changes made to the toggleButtons and reacts to them 

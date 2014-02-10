@@ -51,5 +51,7 @@ public class Constants {
 	public static void LOG(String s){
 		if(debugging) System.out.println(s);
 	}
-	
+	public static void LOGERROR(String s){
+		if(debugging) System.err.println(s);
+	}
 }

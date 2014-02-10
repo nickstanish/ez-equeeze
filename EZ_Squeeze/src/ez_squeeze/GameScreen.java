@@ -1,5 +1,6 @@
 package ez_squeeze;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -9,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.Box;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,13 +18,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
 
 import ez_squeeze.game.Constants;
 import ez_squeeze.game.PurchaseManager;
 import ez_squeeze.game.RecipeInputException;
 import ez_squeeze.game.RecipePanel;
 import ez_squeeze.game.State;
+import forecast.ForecastPanel;
 /**
  * 
  * @author Nick Stanish
@@ -38,6 +42,7 @@ public class GameScreen extends JPanel{
 	public JButton menuButton, saveButton, startButton;
 	public JPanel navPanel, startPanel;
 	public JToolBar bottomToolBar;
+	public ForecastPanel forecastPanel;
 	public JLabel lemonLabel, iceLabel, sugarLabel, cupLabel, walletLabel;
 	public boolean mediaFound = false;
 	public EzSqueeze game;
@@ -52,10 +57,19 @@ public class GameScreen extends JPanel{
 		this.add(navPanel);
 		initNav();
 		this.purchaseManager = new PurchaseManager(this, state);
+		this.purchaseManager.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 		this.add(purchaseManager);
-		this.add(Box.createRigidArea(new Dimension(1,50)));
+		// this.add(Box.createRigidArea(new Dimension(1,50)));
+		JPanel recipeAndForecastPanels = new JPanel(new FlowLayout(FlowLayout.LEADING));
+		recipeAndForecastPanels.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 		recipePanel = new RecipePanel();
-		this.add(recipePanel);
+		forecastPanel = new ForecastPanel(state);
+		recipeAndForecastPanels.add(recipePanel);
+		JSeparator separator = new JSeparator(JSeparator.VERTICAL);
+		separator.setPreferredSize(new Dimension(10,recipePanel.getPreferredSize().height));
+		recipeAndForecastPanels.add(separator);
+		recipeAndForecastPanels.add(forecastPanel);
+		this.add(recipeAndForecastPanels);
 		startPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
 		initStart();
 		this.add(startPanel);
@@ -165,6 +179,7 @@ public class GameScreen extends JPanel{
 	 */
 	public void updateStateLabels(State state){
 		if(state == null) return;
+		forecastPanel.update();
 		if(mediaFound){
 			lemonLabel.setText(state.lemons + "");
 			iceLabel.setText(state.ice + "");
@@ -189,6 +204,7 @@ public class GameScreen extends JPanel{
 	public void loadState(State state){
 		this.state = state;
 		this.purchaseManager.state = state;
+		this.forecastPanel.state = state;
 		updateStateLabels(state);
 	}
 	public static void main(String[] args){

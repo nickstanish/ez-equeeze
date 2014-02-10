@@ -13,6 +13,10 @@ import forecast.Forecast;
  *
  */
 public class State implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3476352446933003208L;
 	public int lemons, ice, sugar, cups;
 	public Recipe recipe;
 	public double money;
