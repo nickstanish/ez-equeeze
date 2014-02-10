@@ -1,7 +1,9 @@
 EZ SQUEEZE EMPIRE	
+=================
 open source lemonade stand business game in java by Nick Stanish
 
 Before v3 alpha release:
+-------------------------
 
 [x] get to game screen<br>
 [x] purchase display<br>
@@ -9,7 +11,7 @@ Before v3 alpha release:
 [x] item display<br>
 [x] buying items<br>
 [x] instances of people<br>
-[ ] temperature/day display<br>
+[x] temperature/day display<br>
 [ ] start day logic<br>
 [ ] next day logic (update views)<br>
 [ ] end of day display<br>
