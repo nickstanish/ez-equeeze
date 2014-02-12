@@ -1,4 +1,4 @@
-package forecast;
+package ez_squeeze.game.forecast;
 
 import ez_squeeze.game.Constants;
 /**

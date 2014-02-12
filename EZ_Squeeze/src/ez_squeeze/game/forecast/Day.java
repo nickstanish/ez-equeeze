@@ -1,4 +1,4 @@
-package forecast;
+package ez_squeeze.game.forecast;
 import java.io.Serializable;
 import java.util.Random;
 /**

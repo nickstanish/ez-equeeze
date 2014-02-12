@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import ez_squeeze.game.Constants;
 import ez_squeeze.game.Recipe.Criticism;
 import ez_squeeze.game.Recipe.Flavor;
-import forecast.Day;
-import forecast.Days;
+import ez_squeeze.game.forecast.Day;
+import ez_squeeze.game.forecast.Days;
 public class Person implements Serializable{
 	/*
 	 * GNU GPL v3

@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import forecast.Day;
+import ez_squeeze.game.forecast.Day;
 /**
  * Uses JUnit4 to test functionality of Day class
  * @author Nick Stanish

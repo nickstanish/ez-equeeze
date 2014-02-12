@@ -3,9 +3,9 @@ package ez_squeeze.game;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import ez_squeeze.game.forecast.Day;
+import ez_squeeze.game.forecast.Forecast;
 import ez_squeeze.game.people.Person;
-import forecast.Day;
-import forecast.Forecast;
 
 /**
  * Encapsulates variables

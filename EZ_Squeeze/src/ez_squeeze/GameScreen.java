@@ -27,7 +27,7 @@ import ez_squeeze.game.PurchaseManager;
 import ez_squeeze.game.RecipeInputException;
 import ez_squeeze.game.RecipePanel;
 import ez_squeeze.game.State;
-import forecast.ForecastPanel;
+import ez_squeeze.game.forecast.ForecastPanel;
 /**
  * 
  * @author Nick Stanish

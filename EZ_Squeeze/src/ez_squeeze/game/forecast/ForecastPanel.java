@@ -1,4 +1,4 @@
-package forecast;
+package ez_squeeze.game.forecast;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
