@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Constants {
 	public static final Random random = new Random();
-	public static final boolean debugging = true; // enable to print to console
+	public static 		 boolean debugging = true; // enable to print to console
     public static final double startingMoney = 25.00; //starting money
     public static final double defaultPrice = 0.25; //default price
     public static final DecimalFormat priceFormat = new DecimalFormat("$0.00");

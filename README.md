@@ -12,8 +12,8 @@ Before v3 alpha release:
 [x] buying items<br>
 [x] instances of people<br>
 [x] temperature/day display<br>
-[ ] start day logic<br>
-[ ] next day logic (update views)<br>
+[x] start day logic<br>
+[x] next day logic (update views)<br>
 [ ] end of day display<br>
 
 Currently working on massive restructuring and is currently unplayable in most recent commits. I hope to have a playable version soon, but until then feel free to play an old version using an executable jar at https://code.google.com/p/ez-squeeze-empire/downloads/list

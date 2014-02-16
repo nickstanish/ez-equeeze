@@ -23,6 +23,7 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
 import ez_squeeze.game.Constants;
+import ez_squeeze.game.GamePlay;
 import ez_squeeze.game.PurchaseManager;
 import ez_squeeze.game.RecipeInputException;
 import ez_squeeze.game.RecipePanel;
@@ -111,7 +112,10 @@ public class GameScreen extends JPanel{
 		// grab recipe values
 		try{
 			state.recipe = recipePanel.getRecipe();
+			GamePlay.simulateDay(state);
 			Constants.LOG(state.recipe.toString());
+			Constants.LOG(GamePlay.findAverageSatisfaction(state) + "");
+			state.nextDay();
 		}
 		catch(RecipeInputException r){
 			Constants.LOG(r.toString());
