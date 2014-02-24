@@ -17,6 +17,9 @@ public class Stats implements Serializable{
 	public double moneyEarned = 0;
 	public double cupsSold = 0;
 	public double cupsSoldToday = 0;
+	public int visitorsToday = 0;
+	public double averageSatisfaction = 0;
+	public double moneyEarnedToday = 0;
 	
 	
 	

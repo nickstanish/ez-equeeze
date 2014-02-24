@@ -27,6 +27,7 @@ import ez_squeeze.game.GamePlay;
 import ez_squeeze.game.PurchaseManager;
 import ez_squeeze.game.RecipeInputException;
 import ez_squeeze.game.RecipePanel;
+import ez_squeeze.game.ResultPanel;
 import ez_squeeze.game.State;
 import ez_squeeze.game.forecast.ForecastPanel;
 /**
@@ -49,6 +50,7 @@ public class GameScreen extends JPanel{
 	public EzSqueeze game;
 	public PurchaseManager purchaseManager;
 	public RecipePanel recipePanel;
+	public ResultPanel resultPanel;
 	public GameScreen(EzSqueeze game, State state){
 		super();
 		this.game = game;
@@ -71,6 +73,8 @@ public class GameScreen extends JPanel{
 		recipeAndForecastPanels.add(separator);
 		recipeAndForecastPanels.add(forecastPanel);
 		this.add(recipeAndForecastPanels);
+		resultPanel = new ResultPanel();
+		this.add(resultPanel);
 		startPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
 		initStart();
 		this.add(startPanel);
@@ -115,6 +119,9 @@ public class GameScreen extends JPanel{
 			GamePlay.simulateDay(state);
 			Constants.LOG(state.recipe.toString());
 			Constants.LOG(GamePlay.findAverageSatisfaction(state) + "");
+			resultPanel.updateTable(state);
+			// ICE MELTS
+			state.ice = 0;
 			state.nextDay();
 		}
 		catch(RecipeInputException r){
@@ -210,6 +217,7 @@ public class GameScreen extends JPanel{
 		this.purchaseManager.state = state;
 		this.forecastPanel.state = state;
 		updateStateLabels(state);
+		resultPanel.updateTable(state);
 	}
 	public static void main(String[] args){
 		JFrame window = new JFrame("GameScreen");
