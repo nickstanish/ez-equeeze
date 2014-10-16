@@ -102,10 +102,8 @@ public class TopMenuScreen extends JPanel implements MouseListener, MouseMotionL
 		if(mouseLocation != null) g.fill(new Ellipse2D.Double(mouseLocation.x - 5, mouseLocation.y - 5, 10, 10));
 	}
 
-	@Override
 	public void mouseClicked(MouseEvent e) {}
 
-	@Override
 	public void mousePressed(MouseEvent e) {
 		for(TopMenuItem item: menuItems){
 			if(mouseLocation != null && item.hovered(mouseLocation)){
@@ -141,21 +139,16 @@ public class TopMenuScreen extends JPanel implements MouseListener, MouseMotionL
 		}
 	}
 
-	@Override
 	public void mouseReleased(MouseEvent e) {}
 
-	@Override
 	public void mouseEntered(MouseEvent e) {}
 
-	@Override
 	public void mouseExited(MouseEvent e) {}
 
-	@Override
 	public void mouseDragged(MouseEvent e) {
 		mouseLocation = e.getPoint();
 	}
 
-	@Override
 	public void mouseMoved(MouseEvent e) {
 		mouseLocation = e.getPoint();
 	}
