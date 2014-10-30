@@ -1,11 +1,10 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * To change this template, choose Tools | Templates and open the template in the editor.
  */
 package ez_squeeze.game;
+
 /*
- * GNU GPL v3
- * Copyright 2011-2012 Nick Stanish
+ * GNU GPL v3 Copyright 2011-2012 Nick Stanish
  */
 
 import java.io.File;
@@ -17,48 +16,43 @@ import javax.swing.filechooser.FileSystemView;
  * @author nickstanish
  */
 
-  public class RestrictedFileChooser extends FileSystemView
-{
-    private File[] rootDirectories;
 
-    public RestrictedFileChooser(File rootDirectory)
-    {
-        this.rootDirectories = new File[] {rootDirectory};
-    }
+public class RestrictedFileChooser extends FileSystemView {
+  private File[] rootDirectories;
 
-    public RestrictedFileChooser(File[] rootDirectories)
-    {
-        this.rootDirectories = rootDirectories;
-    }
+  public RestrictedFileChooser(File rootDirectory) {
+    this.rootDirectories = new File[] {rootDirectory};
+  }
 
-    @Override
-    public File createNewFolder(File containingDir) throws IOException
-    {       
-        throw new UnsupportedOperationException("Unable to create directory");
-    }
+  public RestrictedFileChooser(File[] rootDirectories) {
+    this.rootDirectories = rootDirectories;
+  }
 
-    @Override
-    public File[] getRoots()
-    {
-        return rootDirectories;
-    }
-    @Override
-    public File getHomeDirectory()
-    {
-        return rootDirectories[0];
-    }
+  @Override
+  public File createNewFolder(File containingDir) throws IOException {
+    throw new UnsupportedOperationException("Unable to create directory");
+  }
+
+  @Override
+  public File[] getRoots() {
+    return rootDirectories;
+  }
+
+  @Override
+  public File getHomeDirectory() {
+    return rootDirectories[0];
+  }
 
 
-    @Override
-    public boolean isRoot(File file)
-    {
-        for (File root : rootDirectories) {
-            if (root.equals(file)) {
-                return true;
-            }
-        }
-        return false;
+  @Override
+  public boolean isRoot(File file) {
+    for (File root : rootDirectories) {
+      if (root.equals(file)) {
+        return true;
+      }
     }
+    return false;
+  }
 }
 /*
  * 
