@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
 import ez_squeeze.GameScreen;
+import ez_squeeze.game.exceptions.NotEnoughMoneyException;
 /**
  * 
  * @author Nick Stanish

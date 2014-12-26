@@ -1,4 +1,4 @@
-package ez_squeeze.game;
+package ez_squeeze.game.exceptions;
 
 public class RecipeInputException extends Exception {
 
