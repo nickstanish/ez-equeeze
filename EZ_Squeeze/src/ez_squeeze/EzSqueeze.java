@@ -7,16 +7,16 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.io.File;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.BevelBorder;
 
+import net.vizbits.materialdesigncolors.MaterialColor;
 import ez_squeeze.game.Constants;
 import ez_squeeze.game.State;
+import ez_squeeze.media.FontLoader;
 import ez_squeeze.topmenu.TopMenuScreen;
 
 public class EzSqueeze extends JFrame {
@@ -68,17 +68,19 @@ public class EzSqueeze extends JFrame {
   }
 
   private void initTop() {
-    topPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+    // topPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
     titleLabel = new JLabel("EZ Squeeze");
-    titleLabel.setFont(new Font(Font.SERIF, Font.BOLD, 40));
-    titleLabel.setForeground(Color.BLACK);
+    titleLabel.setFont(FontLoader.loadFontElse(FontLoader.SANSATION_REGULAR, Font.BOLD, 40,
+        Font.SERIF));
+    titleLabel.setForeground(Color.decode(MaterialColor.YELLOW));
     topPanel.add(titleLabel);
-    topPanel.setBackground(Color.YELLOW);
+    topPanel.setDoubleBuffered(true);
+    topPanel.setBackground(Color.decode(MaterialColor.WHITE));
 
   }
 
   private void initCards() {
-    cardPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+    // cardPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
     cardPanel.setBackground(Color.YELLOW);
     menuCard = new TopMenuScreen(this);
     cardPanel.add(menuCard, Cards.MENU.name());
