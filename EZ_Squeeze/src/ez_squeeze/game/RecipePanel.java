@@ -94,6 +94,13 @@ public class RecipePanel extends JPanel {
     this.add(panel, BorderLayout.CENTER);
   }
 
+  public void setRecipe(Recipe recipe) {
+    lemonField.setText(recipe.lemons + "");
+    iceField.setText(recipe.ice + "");
+    sugarField.setText(recipe.sugar + "");
+    priceField.setText(recipe.price + "");
+  }
+
   public Recipe getRecipe() throws RecipeInputException, RecipeInvalidException,
       PriceInvalidException {
     int lemons = (int) getTextWrapper(lemonField);

@@ -230,6 +230,9 @@ public class GameScreen extends JPanel {
     this.purchaseManager.state = state;
     this.forecastPanel.state = state;
     updateStateLabels(state);
+    if (state.recipe != null) {
+      recipePanel.setRecipe(state.recipe);
+    }
     resultPanel.updateTable(state);
   }
 
