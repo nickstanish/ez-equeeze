@@ -17,18 +17,21 @@ import net.vizbits.materialdesigncolors.MaterialColor;
 import ez_squeeze.game.Constants;
 import ez_squeeze.game.State;
 import ez_squeeze.media.FontLoader;
-import ez_squeeze.topmenu.TopMenuScreen;
+import ez_squeeze.menu.Menu;
+import ez_squeeze.menu.MenuItem;
+import ez_squeeze.menu.MenuPanel;
 
 public class EzSqueeze extends JFrame {
   /**
    * @author Nick Stanish
    */
   private static final long serialVersionUID = 2902265810787080470L;
-  public static final String version = "3.0.0";
+  public static final String version = "3.0.1";
   public JPanel topPanel, cardPanel, contentPane;
   public JPanel optionsCard, helpCard, exitCard; // cards/views
   public GameScreen gameCard;
-  public TopMenuScreen menuCard;
+  private MenuPanel menuPanel;
+  private MenuItem continueItem;
   public JLabel titleLabel;
   public JFileChooser fileChooser;
 
@@ -79,28 +82,48 @@ public class EzSqueeze extends JFrame {
 
   }
 
+  private Menu createMenu() {
+    Menu menu = new Menu();
+    continueItem = new MenuItem("Continue", () -> displayContinue());
+    MenuItem newGameItem = new MenuItem("New Game", () -> displayNew());
+    MenuItem loadItem = new MenuItem("Load", () -> displayLoad());
+    MenuItem optionsItem = new MenuItem("Options", () -> displayOptions());
+    MenuItem helpItem = new MenuItem("Help", () -> displayHelp());
+    MenuItem aboutItem = new MenuItem("About", () -> displayAbout());
+    MenuItem exitItem = new MenuItem("Exit", () -> displayExit());
+    continueItem.setEnabled(false);
+    optionsItem.setEnabled(false);
+    helpItem.setEnabled(false);
+    aboutItem.setEnabled(false);
+    menu.registerItem(continueItem, newGameItem, loadItem, optionsItem, helpItem, aboutItem,
+        exitItem);
+    return menu;
+  }
+
   private void initCards() {
     // cardPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
     cardPanel.setBackground(Color.YELLOW);
-    menuCard = new TopMenuScreen(this);
-    cardPanel.add(menuCard, Cards.MENU.name());
+    // menuCard = new TopMenuScreen(this);
+
+    menuPanel = new MenuPanel(createMenu());
+    cardPanel.add(menuPanel, Cards.MENU.name());
     gameCard = new GameScreen(this, null);
     cardPanel.add(gameCard, Cards.GAME.name());
   }
 
-  public void displayAbout() {
+  private void displayAbout() {
     // TODO Auto-generated method stub
 
   }
 
-  public void displayExit() {
+  private void displayExit() {
     if (Constants.debugging)
       System.err.println("Exitting ---TODO: show are you sure screen?");
     System.exit(0);
 
   }
 
-  public void displayHelp() {
+  private void displayHelp() {
     // TODO Auto-generated method stub
 
   }
@@ -118,7 +141,7 @@ public class EzSqueeze extends JFrame {
     }
   }
 
-  public void displayLoad() {
+  private void displayLoad() {
     int val = fileChooser.showOpenDialog(this);
     switch (val) {
       case JFileChooser.APPROVE_OPTION:
@@ -134,25 +157,25 @@ public class EzSqueeze extends JFrame {
 
   }
 
-  public void displayNew() {
+  private void displayNew() {
     gameCard.loadState(new State());
     CardLayout cl = (CardLayout) (cardPanel.getLayout());
     cl.show(cardPanel, Cards.GAME.name());
 
   }
 
-  public void displayOptions() {
+  private void displayOptions() {
     // TODO Auto-generated method stub
 
   }
 
   public void displayMenuFromGame() {
-    menuCard.continueItem.enabled = true;
+    continueItem.setEnabled(true);
     CardLayout cl = (CardLayout) (cardPanel.getLayout());
     cl.show(cardPanel, Cards.MENU.name());
   }
 
-  public void displayContinue() {
+  private void displayContinue() {
     CardLayout cl = (CardLayout) (cardPanel.getLayout());
     cl.show(cardPanel, Cards.GAME.name());
   }

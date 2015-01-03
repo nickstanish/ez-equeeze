@@ -117,25 +117,25 @@ public class TopMenuScreen extends JPanel implements MouseListener, MouseMotionL
         if (game != null) {
           switch (item.item) {
             case ABOUT:
-              game.displayAbout();
+              // game.displayAbout();
               break;
             case EXIT:
-              game.displayExit();
+              // game.displayExit();
               break;
             case HELP:
-              game.displayHelp();
+              // game.displayHelp();
               break;
             case LOAD:
-              game.displayLoad();
+              // game.displayLoad();
               break;
             case NEW:
-              game.displayNew();
+              // game.displayNew();
               break;
             case OPTIONS:
-              game.displayOptions();
+              // game.displayOptions();
               break;
             case CONTINUE:
-              game.displayContinue();
+              // game.displayContinue();
               break;
             default:
               break;
