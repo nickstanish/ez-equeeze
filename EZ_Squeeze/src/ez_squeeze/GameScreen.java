@@ -239,7 +239,7 @@ public class GameScreen extends JPanel {
   public static void main(String[] args) {
     JFrame window = new JFrame("GameScreen");
     window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    GameScreen game = new GameScreen(null, new State());
+    GameScreen game = new GameScreen(null, new State(true));
     window.getContentPane().add(game);
     window.pack();
     window.setVisible(true);

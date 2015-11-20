@@ -6,11 +6,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFileChooser;
@@ -20,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import net.vizbits.materialdesigncolors.MaterialColor;
+import ez_squeeze.files.LoadHelper;
+import ez_squeeze.files.SaveHelper;
 import ez_squeeze.game.Constants;
 import ez_squeeze.game.State;
 import ez_squeeze.media.FontLoader;
@@ -32,7 +29,7 @@ public class EzSqueeze extends JFrame {
    * @author Nick Stanish
    */
   private static final long serialVersionUID = 2902265810787080470L;
-  public static final String version = "3.1.0";
+  public static final String version = "3.0.0-alpha-1";
   public JPanel topPanel, cardPanel, contentPane;
   public JPanel optionsCard, helpCard, exitCard; // cards/views
   public GameScreen gameCard;
@@ -146,27 +143,11 @@ public class EzSqueeze extends JFrame {
       new Thread() {
         public void run() {
           try {
-            File file = addFileExtension(selectedFile, ".ezs");
-            Constants.LOG("Save " + file.getName());
-            if (file.exists()) {
-              int overwrite =
-                  JOptionPane.showConfirmDialog(null,
-                      "Are you sure you want to overwrite this file?");
-              if (overwrite != JOptionPane.OK_OPTION) {
-                return;
-              }
-            }
-            if (file.getParentFile() != null) {
-              file.getParentFile().mkdirs();
-            }
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(state);
-            objectOutputStream.close();
-            fileOutputStream.close();
-            // save here
+            SaveHelper saveHelper = new SaveHelper();
+            saveHelper.writeSave(selectedFile, state);
+
             JOptionPane.showMessageDialog(null, "Saved!");
-          } catch (IOException e) {
+          } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "An error occured while saving");
 
@@ -177,18 +158,6 @@ public class EzSqueeze extends JFrame {
 
   }
 
-  public static File addFileExtension(File file, String extension) throws IOException {
-    String name = file.getCanonicalPath();
-    if (!name.endsWith(extension)) {
-      int index = name.lastIndexOf('.');
-      if (index > 0 && index > name.lastIndexOf(File.separator)) {
-        // existing extension
-        name = name.substring(0, index);
-      }
-      name = name.concat(extension);
-    }
-    return new File(name);
-  }
 
   private void displayLoad() {
     int result = fileChooser.showOpenDialog(this);
@@ -197,12 +166,9 @@ public class EzSqueeze extends JFrame {
       Constants.LOG("Load " + file.getName());
       State state = null;
       try {
-        FileInputStream fileInputStream = new FileInputStream(file);
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        state = (State) objectInputStream.readObject();
-        objectInputStream.close();
-        fileInputStream.close();
-      } catch (IOException | ClassCastException | ClassNotFoundException e) {
+        LoadHelper loadHelper = new LoadHelper();
+        state = loadHelper.readSave(file);
+      } catch (Exception e) {
         e.printStackTrace();
         Constants.LOGERROR(e.getMessage());
       }
@@ -219,7 +185,7 @@ public class EzSqueeze extends JFrame {
   }
 
   private void displayNew() {
-    gameCard.loadState(new State());
+    gameCard.loadState(new State(true));
     CardLayout cl = (CardLayout) (cardPanel.getLayout());
     cl.show(cardPanel, Cards.GAME.name());
 

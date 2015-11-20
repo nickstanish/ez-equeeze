@@ -66,7 +66,7 @@ public class ForecastPanel extends JPanel {
   public static void main(String[] args) {
     JFrame test = new JFrame();
     test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    final State state = new State();
+    final State state = new State(true);
     final ForecastPanel fp = new ForecastPanel(state);
     JPanel panel = new JPanel();
     panel.setBorder(BorderFactory.createLineBorder(Color.cyan, 3));

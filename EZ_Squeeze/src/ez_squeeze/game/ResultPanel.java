@@ -7,8 +7,12 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 public class ResultPanel extends JPanel {
-  private String[] columnNames = {"Visitors Today", "Sales", "Total Sales", "Profit",
-      "Total Profit", "Avg Satisfaction", "Days"};
+
+  private static final long serialVersionUID = 6431030015477700513L;
+
+
+  private String[] columnNames = {"Visitors Today", "Sales", "Total Sales", "Revenue",
+      "Total Revenue", "Avg Satisfaction", "Days"};
   private Object[][] data = {{0, 0, 0, 0, 0, 50, 0}};
   private JTable table;
 
@@ -22,15 +26,17 @@ public class ResultPanel extends JPanel {
   }
 
   public void updateTable(State state) {
-    if (state == null)
+    if (state == null) {
       return;
+    }
     Stats stats = state.stats;
     table.getModel().setValueAt(stats.visitorsToday, 0, 0);
-    table.getModel().setValueAt(stats.cupsSoldToday, 0, 1);
-    table.getModel().setValueAt(stats.cupsSold, 0, 2);
-    table.getModel().setValueAt(stats.moneyEarnedToday, 0, 3);
-    table.getModel().setValueAt(stats.moneyEarned, 0, 4);
-    table.getModel().setValueAt(stats.averageSatisfaction, 0, 5);
+    table.getModel().setValueAt(stats.salesToday, 0, 1);
+    table.getModel().setValueAt(stats.sales, 0, 2);
+    table.getModel().setValueAt(Constants.priceFormat.format(stats.revenueToday), 0, 3);
+    table.getModel().setValueAt(Constants.priceFormat.format(stats.revenue), 0, 4);
+    table.getModel().setValueAt(Constants.satisfactionFormat.format(stats.averageSatisfaction), 0,
+        5);
     table.getModel().setValueAt(stats.days, 0, 6);
   }
 

@@ -25,8 +25,32 @@ public class Recipe implements Serializable {
   public enum Flavor {
     Sweet, Sour, Vomit
   }
+
+
   public enum Criticism {
-    Bad, Okay, Good, Perfect
+    Bad(Constants.bad_recipe, ":["),
+
+    Okay(Constants.okay_recipe, ":|"),
+
+    Good(Constants.good_recipe, ":)"),
+
+    Perfect(Constants.perfect_recipe, ":D");
+
+    Criticism(double score, String reaction) {
+      this.score = score;
+      this.reaction = reaction;
+    }
+
+    private double score;
+    private String reaction;
+
+    public String getReaction() {
+      return this.reaction;
+    }
+
+    public double getScore() {
+      return this.score;
+    }
   }
 
   /**
