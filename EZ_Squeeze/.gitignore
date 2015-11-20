@@ -1,3 +1,5 @@
 /target/
+*.sav
+*.ezs
 /bin/
 /saves/

@@ -219,7 +219,7 @@ public class EzSqueeze extends JFrame {
   }
 
   private void displayNew() {
-    gameCard.loadState(new State());
+    gameCard.loadState(new State(true));
     CardLayout cl = (CardLayout) (cardPanel.getLayout());
     cl.show(cardPanel, Cards.GAME.name());
 

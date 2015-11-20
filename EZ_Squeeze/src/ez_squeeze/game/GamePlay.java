@@ -77,7 +77,7 @@ public class GamePlay {
 
   public static void main(String[] args) {
     Constants.LOG("TEST");
-    State state = new State();
+    State state = new State(true);
     state.recipe = new Recipe(5, 3, 2, 0.3);
     mainTestSim(state);
     mainTestSim(state);

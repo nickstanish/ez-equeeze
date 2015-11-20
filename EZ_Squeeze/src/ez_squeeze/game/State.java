@@ -19,25 +19,39 @@ public class State implements Serializable {
 	 * 
 	 */
   private static final long serialVersionUID = 3476352446933003208L;
-  public int lemons, ice, sugar, cups;
+  public Integer lemons, ice, sugar, cups;
   public Recipe recipe;
-  public double money;
+  public Double money;
   public Day day = new Day();
   public Forecast forecast = new Forecast();
   public Stats stats = new Stats();
   public List<Person> persons = new ArrayList<Person>();
 
-  public State() {
+  public State() {}
+
+  public State(boolean initialize) {
+    this();
+    if (initialize) {
+      init();
+    }
+  }
+
+
+
+  private void init() {
     lemons = 0;
     ice = 0;
     sugar = 0;
     cups = 0;
     money = Constants.startingMoney;
     recipe = new Recipe(2, 2, 2, 0.25);
+    generatePeople();
+  }
+
+  private void generatePeople() {
     for (int i = 0; i < Constants.startingPersons; i++) {
       persons.add(new Person());
     }
-    printCustomers();
   }
 
   public void print() {
