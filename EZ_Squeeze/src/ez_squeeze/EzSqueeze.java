@@ -29,7 +29,7 @@ public class EzSqueeze extends JFrame {
    * @author Nick Stanish
    */
   private static final long serialVersionUID = 2902265810787080470L;
-  public static final String version = "3.0.0-beta";
+  public static final String version = "3.0.0-alpha-1";
   public JPanel topPanel, cardPanel, contentPane;
   public JPanel optionsCard, helpCard, exitCard; // cards/views
   public GameScreen gameCard;
