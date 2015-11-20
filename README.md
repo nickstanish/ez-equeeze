@@ -4,9 +4,8 @@ _open source lemonade stand business game in Java by Nick Stanish_
 
 ********************************************************
 
-v3 alpha release:
+v3.0.0-alpha.1 release:
 -------------------------
-_expected release by 2/23/2012_
 
 Get it here: <https://github.com/nickstanish/ez-squeeze/releases>
 
@@ -24,6 +23,7 @@ Get it here: <https://github.com/nickstanish/ez-squeeze/releases>
 - start day logic
 - next day logic (update views )
 - end of day display
+- loading/saving
 
 
 **********************************************************
