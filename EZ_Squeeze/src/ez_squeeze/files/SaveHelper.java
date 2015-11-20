@@ -27,7 +27,7 @@ public class SaveHelper extends FileHelper {
     return true;
   }
 
-  public File addFileExtension(File file, String extension) throws IOException {
+  public static File addFileExtension(File file, String extension) throws IOException {
     String name = file.getCanonicalPath();
     if (!name.endsWith(extension)) {
       int index = name.lastIndexOf('.');
@@ -42,10 +42,15 @@ public class SaveHelper extends FileHelper {
 
 
   public void writeSave(File file, State state) throws Exception {
+    // https://github.com/nickstanish/ez-squeeze/commit/ac3abbd6292073d7f0b3865151b683e0338ef777#diff-d5614ed14f9e9fb7e5ec48860f0ee49eL141
     file = addFileExtension(file, FILE_EXTENSION);
     if (!verifyWrite(file)) {
       Constants.LOG("Cancelled write");
       return;
+    }
+
+    if (file.getParentFile() != null) {
+      file.getParentFile().mkdirs();
     }
 
     Gson gson = new Gson();

@@ -37,7 +37,8 @@ public class Recipe implements Serializable {
     Perfect(Constants.perfect_recipe, ":D");
 
     Criticism(double score, String reaction) {
-
+      this.score = score;
+      this.reaction = reaction;
     }
 
     private double score;
