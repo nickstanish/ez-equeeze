@@ -6,9 +6,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFileChooser;
@@ -32,7 +29,7 @@ public class EzSqueeze extends JFrame {
    * @author Nick Stanish
    */
   private static final long serialVersionUID = 2902265810787080470L;
-  public static final String version = "3.1.0";
+  public static final String version = "3.0.0-beta";
   public JPanel topPanel, cardPanel, contentPane;
   public JPanel optionsCard, helpCard, exitCard; // cards/views
   public GameScreen gameCard;
